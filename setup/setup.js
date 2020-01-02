@@ -17,9 +17,13 @@ const COLLECTIONS = [
          * firebase dashboard.
          */
         {
-          email: 'test@test.com',
-          role: 'user'
+          email: 'info@jaspero.co',
+          role: 'admin'
         },
+        {
+          email: 'antonio.stipic2@gmail.com',
+          role: 'admin'
+        }
       ]
     }]
   },
@@ -216,7 +220,7 @@ const serviceAccount = require('./serviceAccountKey.json');
  */
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://jaspero-jms.firebaseio.com'
+  databaseURL: 'https://mg-photography-98d6d.firebaseio.com'
 });
 
 async function exec() {

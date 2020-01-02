@@ -2,6 +2,6 @@
  * Configuration that is consistent across environments
  */
 export const STATIC_CONFIG = {
-  displayName: 'JMS',
+  displayName: 'MG Photography',
   elementSelectorPrefix: 'jms-e-'
 };

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "firebase-setup": "firebase use mg-photography-98d6d",
     "target-setup": "firebase target:apply hosting cms mg-photography-cms",
     "build": "npm --prefix client run build && npm --prefix functions run build",
     "lint:client": "npm --prefix client run lint",

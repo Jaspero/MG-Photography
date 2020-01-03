@@ -65,10 +65,10 @@ jobs:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Firebase Setup
-          command: npm run firebase-setup
+          command: npm run firebase-setup --token $FIREBASE_CI_TOKEN
       - run:
           name: Setup Firebase Configuration
-          command: npm run target-setup
+          command: npm run target-setup --token $FIREBASE_CI_TOKEN
       - run:
           name: Deploy Master to Firebase
           command: npm run deploy  -- -m $CIRCLE_SHA1 --token $FIREBASE_CI_TOKEN

@@ -1,5 +1,5 @@
 {
-  "name": "@jaspero/jms",
+  "name": "@jaspero/mg-photography",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaspero/jms"
+    "url": "https://github.com/jaspero/mg-photography"
   },
   "bugs": {
-    "url": "https://github.com/jaspero/jms/issues"
+    "url": "https://github.com/jaspero/mg-photography/issues"
   },
-  "homepage": "https://jaspero-jms.firebaseapp.com",
+  "homepage": "https://mg-photography-98d6d.web.app",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",

@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Jaspero/mg-photography.svg?style=svg)](https://circleci.com/gh/Jaspero/mg-photography)
+[![CircleCI](https://circleci.com/gh/Jaspero/MG-Photography.svg?style=svg)](https://circleci.com/gh/Jaspero/MG-Photography)
 
 # MG Photography
 

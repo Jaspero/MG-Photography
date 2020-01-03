@@ -1,13 +1,10 @@
 {
-  "projects": {
-    "default": "mg-photography-98d6d"
-  },
   "targets": {
     "mg-photography-98d6d": {
       "hosting": {
         "cms": [
           "mg-photography-cms"
-        ],
+        ]
       }
     }
   }

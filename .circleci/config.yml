@@ -64,6 +64,9 @@ jobs:
       - restore_cache:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
+          name: Setup Firebase Configuration
+          command: npm run target-setup
+      - run:
           name: Deploy Master to Firebase
           command: npm run deploy  -- -m $CIRCLE_SHA1 --token $FIREBASE_CI_TOKEN --project mg-photography-98d6d
 

@@ -21,6 +21,7 @@
 	refreshData.subscribe(siteData => {
 		if (siteData) {
 			site = siteData;
+			error = false;
 		} else {
 			error = true;
 		}

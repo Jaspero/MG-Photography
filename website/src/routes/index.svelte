@@ -26,34 +26,7 @@
 </script>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  @font-face {
-    font-family: "Particle";
-    src: url("../fonts/Particle-Regular.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: "Simplo";
-    src: url("../fonts/Simplo-Light.otf") format("opentype");
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: "Simplo";
-    src: url("../fonts/Simplo-Medium.otf") format("opentype");
-    font-weight: bold;
-  }
-
-  body {
-    margin: 0;
-    font-family: "Particle";
-    background: black;
-  }
-
-  .slideshow-text-title {
+.slideshow-text-title {
     font-size: 6em;
     color: white;
     position: absolute;
@@ -61,9 +34,9 @@
     left: 10vw;
     line-height: 0.8;
     font-weight: normal;
-  }
+}
 
-  .slideshow-text-cta {
+.slideshow-text-cta {
     top: 30vh;
     left: 65vw;
     position: absolute;
@@ -79,55 +52,48 @@
     font-size: 1.5em;
     color: white;
     transition: 0.2s;
-  }
+}
 
-  .slideshow-text-cta:hover {
+.slideshow-text-cta:hover {
     background: #eee;
     color: black;
-  }
+}
 
-  a {
-    text-decoration: none;
-    color: white;
-    padding: 1em;
-    display: inline-block;
-  }
-
-  .slideshow {
+.slideshow {
     width: 100vw;
     height: 100vh;
     position: relative;
     z-index: 1;
 
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: black;
-  }
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+}
 
-  .slideshow-text {
+.slideshow-text {
     position: absolute;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
 
-  .slideshow-images {
+.slideshow-images {
     position: absolute;
     z-index: 1;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .mySlides {
-	opacity: 0;
+.mySlides {
+    opacity: 0;
 
-	-webkit-transition: opacity 1s ease-in-out;
-	-moz-transition: opacity 1s ease-in-out;
-	-ms-transition: opacity 1s ease-in-out;
-	-o-transition: opacity 1s ease-in-out;
-	transition: opacity 1s ease-in-out;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
 
 
     position: absolute;
@@ -135,20 +101,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .mySlides > img {
+.mySlides > img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-	position: fixed;
-	top: 0;
-	left: 0;
-  }
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 
-  .firstPhoto {
-	  opacity: 1;
-  }
+.firstPhoto {
+    opacity: 1;
+}
 </style>
 
 <svelte:head>

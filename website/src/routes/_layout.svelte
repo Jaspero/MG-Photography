@@ -1,43 +1,65 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+  export let segment;
 
-	export let segment;
+  import Footer from '../components/Footer.svelte'
+  import {firestore} from '../firebase';
+  import {categories} from '../stores';
+  import {onMount} from 'svelte';
 
-	import { firestore } from "../firebase";
-	import { categories } from "../stores";
+  let categoriesFetch = fetchCategories();
 
-	import { onMount } from "svelte";
+  async function fetchCategories() {
+    await firestore
+      .collection('categories')
+      .get()
+      .then(data => {
+        categories.set(data.docs.map(doc => doc.data()));
+      });
 
-	let categoriesFetch = fetchCategories();
-
-	async function fetchCategories() {
-		await firestore.collection("categories")
-        .get()
-        .then(data => {
-			categories.set(data.docs.map(doc => doc.data()));
-        });
-
-		return;
-	}
+    return;
+  }
 </script>
 
 <style>
-	main {
-		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
+  header {
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    display: flex;
+  }
+  header.home {
+	  color: white;
+  }
+  header a {
+    display: inline-block;
+    padding: 1em;
+  }
+  header nav {
+    margin-left: auto;
+  }
+  main {
+    position: relative;
+    z-index: 1;
+  }
 </style>
 
-<Nav {segment}/>
+<header class="{segment === undefined ? 'home' : ''}">
+  <a class="logo" href=".">Mislav Gelenčir</a>
+  <nav>
+    <a href="portraits">Portraits</a>
+    <a href="events">Events</a>
+    <a href="music">Music</a>
+    <a href="real-estate">Real-estate</a>
+    <a href="videos">Videos</a>
+  </nav>
+</header>
 
 <main>
-	{#await categoriesFetch}
-		<p>Loading...</p>
-	{:then number}
-		<slot></slot>
-	{/await}
+  {#await categoriesFetch}
+    <p>Loading...</p>
+  {:then number}
+    <slot></slot>
+  {/await}
 </main>
+
+<Footer segment={segment}/>

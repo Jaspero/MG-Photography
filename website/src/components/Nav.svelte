@@ -63,8 +63,8 @@
     <li>
       {#each $categories.reverse() as category}
         <a
-          href={category.name === 'Home' ? '/' : category.name.toLowerCase()}
-          class:selected={category.name === 'home' ? segment === undefined : segment === category.name}>
+          href={category.name.toLowerCase()}
+          class:selected={segment === category.name}>
           {category.name}
         </a>
       {/each}

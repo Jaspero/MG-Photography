@@ -15,7 +15,9 @@
         .get()
         .then(data => {
 			categories.set(data.docs.map(doc => doc.data()));
-        });
+        }).catch(err => {
+			console.log("Categories could not be fetched!");
+		});
 
 		return;
 	}
@@ -25,7 +27,7 @@
 	main {
 		position: relative;
 		max-width: 56em;
-		background-color: white;
+		background-color: black;
 		padding: 2em;
 		margin: 0 auto;
 		box-sizing: border-box;

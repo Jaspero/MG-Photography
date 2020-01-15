@@ -1,31 +1,35 @@
 <script>
-	import { goto, stores } from "@sapper/app";
-	import { derived } from "svelte/store";
-	import { categories } from "../stores";
+  import {goto, stores} from "@sapper/app";
+  import {derived} from "svelte/store";
+  import {categories} from "../stores";
+  import {onDestroy} from "svelte";
 
-	let photoViewerActive = false;
-	let activePhoto = "";
-	
-	// Object containing whole site data
-	let site = null;
-	let error = null;
+  // Object containing whole site data, false = not loaded, undefined = not existant
+  let site = false;
 
-	const refreshData = derived([stores().page, categories], ([page, category]) => {
-		if (!page || !category) {
-			return false;
-		}
+  const refreshData = derived(
+    [stores().page, categories],
+    ([page, category]) => {
+      if (!page || !category) {
+        return false;
+      }
 
-		return category.find(it => it.name.toLowerCase() === page.params.slug);
-	});
+      if (page.path === "/" || page.path === "/contact") return page.path;
 
-	refreshData.subscribe(siteData => {
-		if (siteData) {
-			site = siteData;
-			error = false;
-		} else {
-			error = true;
-		}
-	})
+      return category.find(it => it.name.toLowerCase() === page.params.slug);
+    }
+  ).subscribe(siteData => {
+    if (siteData) {
+      site = siteData;
+    } else if (siteData === undefined) {
+      site = undefined;
+      goto("404");
+    } else if (typeof siteData === "string") {
+      goto(siteData);
+    }
+  });
+
+  onDestroy(refreshData);
 </script>
 
 <style>
@@ -62,7 +66,6 @@
 
     opacity: 0.7;
     background-color: #000;
-
   }
 
   .activePhoto {
@@ -72,14 +75,30 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
 
+  .white-bg {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    padding: 50px;
+
+    background-color: white;
   }
 </style>
 
-{#if site}
-	<h1>{site.name}</h1>
-{/if}
+<div class="white-bg">
+  {#if site}
+    <h1>{site.name}</h1>
 
-{#if error}
-	<h1>Error 404</h1>
-{/if}
+    <a href="/contact" class="slideshow-text-cta">
+      Contact me
+      <br />
+      About me
+    </a>
+  {/if}
+</div>

@@ -1,28 +1,57 @@
 <script>
-  import { onMount } from "svelte";
+  import {onMount, afterUpdate, onDestroy} from 'svelte';
+  import {firestore} from '../firebase';
+  let photos = [];
 
-  let slideIndex = 0;
+  let slidesTimeout;
+
+  function fetchHomePhotos() {
+    return new Promise((resolve, reject) => {
+      firestore
+        .collection('home')
+        .get()
+        .then(data => {
+          photos = data.docs.map(doc => doc.data())[0]['Home Photos'];
+          resolve();
+        })
+        .catch(err => {
+          reject('Landing photos could not be fetched!');
+        });
+    });
+  }
 
   onMount(() => {
-	showSlides();
+    fetchHomePhotos()
+      .then(() => {
+        setTimeout(() => showSlides(-1), 200);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 
-  function showSlides() {
-	  try {
-		let i;
-		let slides = document.getElementsByClassName("mySlides");
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.opacity = 0;
-		}
-		
-		slideIndex = (slideIndex + 1) % (slides.length);
+  function showSlides(slideIndex) {
+    let slides = document.getElementsByClassName('mySlides');
 
-		slides[slideIndex].style.opacity = 1;
-		setTimeout(showSlides, 7000);
-	  } catch(e) {
+    if (slideIndex === -1) slideIndex = slides.length - 1;
 
-	  }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.opacity = 0;
+      slides[i].firstChild.style.opacity = 0;
+    }
+
+    slideIndex = (slideIndex + 1) % slides.length;
+
+    slides[slideIndex].style.opacity = 1;
+    slides[slideIndex].firstChild.style.opacity = 1;
+
+    slidesTimeout = setTimeout(() => showSlides(slideIndex), 7000);
   }
+
+  onDestroy(() => {
+    // Stop slideshow
+    clearTimeout(slidesTimeout);
+  });
 </script>
 
 <style>
@@ -31,25 +60,25 @@
   }
 
   @font-face {
-    font-family: "Particle";
-    src: url("../fonts/Particle-Regular.otf") format("opentype");
+    font-family: 'Particle';
+    src: url('../fonts/Particle-Regular.otf') format('opentype');
   }
 
   @font-face {
-    font-family: "Simplo";
-    src: url("../fonts/Simplo-Light.otf") format("opentype");
+    font-family: 'Simplo';
+    src: url('../fonts/Simplo-Light.otf') format('opentype');
     font-weight: normal;
   }
 
   @font-face {
-    font-family: "Simplo";
-    src: url("../fonts/Simplo-Medium.otf") format("opentype");
+    font-family: 'Simplo';
+    src: url('../fonts/Simplo-Medium.otf') format('opentype');
     font-weight: bold;
   }
 
   body {
     margin: 0;
-    font-family: "Particle";
+    font-family: 'Particle';
     background: black;
   }
 
@@ -57,10 +86,14 @@
     font-size: 6em;
     color: white;
     position: absolute;
-    top: 22vh;
+    top: 28vh;
     left: 10vw;
     line-height: 0.8;
     font-weight: normal;
+
+    white-space: nowrap;
+
+    font-family: 'Particle';
   }
 
   .slideshow-text-cta {
@@ -79,6 +112,8 @@
     font-size: 1.5em;
     color: white;
     transition: 0.2s;
+
+    font-family: 'Particle';
   }
 
   .slideshow-text-cta:hover {
@@ -99,10 +134,10 @@
     position: relative;
     z-index: 1;
 
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
   }
 
   .slideshow-text {
@@ -121,14 +156,9 @@
   }
 
   .mySlides {
-	opacity: 0;
+    opacity: 0;
 
-	-webkit-transition: opacity 1s ease-in-out;
-	-moz-transition: opacity 1s ease-in-out;
-	-ms-transition: opacity 1s ease-in-out;
-	-o-transition: opacity 1s ease-in-out;
-	transition: opacity 1s ease-in-out;
-
+    transition: opacity 1.5s ease-in-out;
 
     position: absolute;
     top: 0;
@@ -141,13 +171,13 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-	position: fixed;
-	top: 0;
-	left: 0;
-  }
+    position: fixed;
+    top: 0;
+    left: 0;
 
-  .firstPhoto {
-	  opacity: 1;
+    transition: opacity 1.5s ease-in-out;
+
+    opacity: 0;
   }
 </style>
 
@@ -170,7 +200,7 @@
       <br />
       look good
     </h1>
-    <a href="#" class="slideshow-text-cta">
+    <a href="/contact" class="slideshow-text-cta">
       Contact me
       <br />
       About me
@@ -180,8 +210,14 @@
   <!-- Slideshow images -->
   <div class="slideshow-images">
 
+    {#each photos as photo}
+      <div class="mySlides">
+        <img alt="" src={photo} style="width: 100%" />
+      </div>
+    {/each}
+
     <!-- Full-width images with number and caption text -->
-    <div class="mySlides fade firstPhoto">
+    <!-- <div class="mySlides fade firstPhoto">
       <img alt="" src="landing/landing-web-1.jpg" style="width:100%" />
     </div>
 
@@ -238,6 +274,6 @@
         alt=""
         src="landing/landing-web-11-version-1.jpg"
         style="width:100%" />
-    </div>
+    </div> -->
   </div>
 </section>

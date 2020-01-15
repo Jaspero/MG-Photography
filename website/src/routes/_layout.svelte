@@ -3,6 +3,7 @@
 
 	export let segment;
 
+	import {goto} from "@sapper/app";
 	import { firestore } from "../firebase";
 	import { categories } from "../stores";
 
@@ -17,6 +18,7 @@
 			categories.set(data.docs.map(doc => doc.data()));
         }).catch(err => {
 			console.log("Categories could not be fetched!");
+			goto("unavailable");
 		});
 
 		return;

@@ -1,4 +1,5 @@
 <script>
+  import {goto} from '@sapper/app';
   import {onMount, afterUpdate, onDestroy} from 'svelte';
   import {firestore} from '../firebase';
   let photos = [];
@@ -6,32 +7,25 @@
   let slidesTimeout;
 
   function fetchHomePhotos() {
-    return new Promise((resolve, reject) => {
-      firestore
-        .collection('home')
-        .get()
-        .then(data => {
-          photos = data.docs.map(doc => doc.data())[0]['Home Photos'];
-          resolve();
-        })
-        .catch(err => {
-          reject('Landing photos could not be fetched!');
-        });
-    });
+    // return new Promise((resolve, reject) => {
+    return firestore.doc('home/home').get();
+    // });
   }
 
   onMount(() => {
     fetchHomePhotos()
-      .then(() => {
+      .then(data => {
+        photos = data.data()['Home Photos'];
         setTimeout(() => showSlides(-1), 200);
       })
       .catch(err => {
-        console.log(err);
+        console.log('Landing photos could not be fetched!', err);
+        goto('unavailable');
       });
   });
 
   function showSlides(slideIndex) {
-    let slides = document.getElementsByClassName('mySlides');
+    const slides = document.getElementsByClassName('mySlides');
 
     if (slideIndex === -1) slideIndex = slides.length - 1;
 

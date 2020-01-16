@@ -50,6 +50,7 @@ jobs:
           paths:
             - package.json
             - client/package.json
+            - __sapper__
             - functions/package.json
             - package-lock.json
             - firebase.json

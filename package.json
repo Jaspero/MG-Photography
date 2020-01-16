@@ -4,12 +4,15 @@
   "license": "MIT",
   "scripts": {
     "firebase-setup": "firebase use mg-photography-98d6d",
-    "target-setup": "firebase target:apply hosting cms mg-photography-cms",
-    "build": "npm --prefix client run build && npm --prefix functions run build",
+    "target-setup": "firebase target:apply hosting cms mg-photography-cms && firebase target:apply hosting website mg-photography-98d6d",
+    "build:client": "npm --prefix client run build",
+    "build:functions": "npm --prefix functions run build",
+    "build:website": "npm --prefix website run build",
+    "build": "npm run build:client && npm run build:website && npm run build:functions",
     "lint:client": "npm --prefix client run lint",
     "lint:functions": "npm --prefix functions run lint",
     "lint": "npm run lint:client && npm run lint:functions",
-    "deploy": "firebase deploy --only storage,firestore,functions:cms,hosting:cms"
+    "deploy": "firebase deploy --only storage,firestore,functions,hosting:cms,hosting:website"
   },
   "author": {
     "name": "Jaspero Ltd",

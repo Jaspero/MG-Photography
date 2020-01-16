@@ -21,6 +21,9 @@ jobs:
           name: Install Client dependencies
           command: yes | npm --prefix client ci || true
       - run:
+          name: Install Website dependencies
+          command: yes | npm --prefix website ci || true
+      - run:
           name: Install Function dependencies
           command: yes | npm --prefix functions ci || true
       - save_cache:
@@ -28,6 +31,7 @@ jobs:
           paths:
             - node_modules
             - client/node_modules
+            - website/node_modules
             - functions/node_modules
       - run:
           name: Linting
@@ -48,6 +52,7 @@ jobs:
             - firebase.json
             - functions/node_modules
             - functions/lib
+            - functions/__sapper__
             - firestore.indexes.json
             - firestore.rules
             - storage.rules

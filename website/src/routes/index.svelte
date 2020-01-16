@@ -27,13 +27,15 @@
 
 <style>
 .slideshow-text-title {
-    font-size: 6em;
+    font-size: 4em;
     color: white;
     position: absolute;
     top: 22vh;
     left: 10vw;
     line-height: 0.8;
     font-weight: normal;
+    font-family: 'Particle';
+    width: 700px;
 }
 
 .slideshow-text-cta {
@@ -64,7 +66,6 @@
     height: 100vh;
     position: relative;
     z-index: 1;
-
     position: fixed;
     top: 0;
     left: 0;

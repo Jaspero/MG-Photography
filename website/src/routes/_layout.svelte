@@ -33,6 +33,7 @@
   header a {
     display: inline-block;
     padding: 1em;
+    font-size: 0.8em;
   }
   header nav {
     margin-left: auto;

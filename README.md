@@ -2,9 +2,9 @@
 
 # MG Photography
 
-This is the full source code for the Autism Center Osijek. The app is built in Sapper and the database and hosting is on Firebase.
+This is the full source code for the MG Photography website. The app is built in Sapper and the database and hosting is on Firebase.
 
-Content management is done through JMS our open source content management system.
+Content management is done through [JMS](https://github.com/Jaspero/jms) our open source content management system.
 
 ## Why is this open source
 

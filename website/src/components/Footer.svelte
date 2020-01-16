@@ -3,23 +3,56 @@
 </script>
 
 <style>
+@font-face {
+    font-family: 'Particle';
+    src: url('../fonts/Particle-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Simplo';
+    src: url('../fonts/Simplo-Light.otf') format('opentype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Simplo';
+    src: url('../fonts/Simplo-Medium.otf') format('opentype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-Light_1.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'JosefinSans';
+    src: url('../fonts/JosefinSans-Bold_1.ttf') format('truetype');
+    font-weight: bold;
+}
   .footer.home {
     display: none;
   }
   .footer-banner {
-      background: #E8E8E8;
-      padding: 1em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #E8E8E8;
+    padding: 2em 1em;
   }
+ 
   .footer-banner-title {
-    margin: auto;
+    margin: 0 auto 2em;
     text-align: center;
-    max-width: 15vw;
-  }
+    max-width: 50vw;
+}
   .footer-banner-title-hey {
     display: block;
     font-family: Simplo;
-    font-size: 0.5vw;
+    font-size: .5vw;
     color: #363636;
+    animation: pero 3s up;
   }
 
   .footer-banner-title-talk {
@@ -28,6 +61,7 @@
     font-size: 7vw;
     font-weight: normal;
     color: #363636;
+    animation: pero 4.3s;
   }
 
   .footer-banner-title-if {
@@ -35,6 +69,7 @@
     font-size: 5vw;
     font-weight: normal;
     color: #363636;
+    animation: pero 5s;
   }
 
   .footer-banner-title-collaborations {
@@ -42,6 +77,7 @@
     font-size: 5vw;
     font-weight: normal;
     color: #363636;
+    animation: pero 6.7s;
   }
 
   .footer-banner-paragraph {
@@ -58,14 +94,15 @@
     font-family: JosefinSans;
     font-size: 1vw;
     font-weight: bold;
-    color: #00b1d2;
+    color: #00B1D2;
     display: inline-block;
-    border-bottom: 2px solid #00b1d2;
+    border-bottom: 2px solid #00B1D2;
+    animation: pero 6s;
   }
 
   .footer-banner-title-any > span {
     display: inline-block;
-    padding: 0 0.5em;
+    padding: 0 .5em;
   }
 
   .contact-me-title {

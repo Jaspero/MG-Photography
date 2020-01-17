@@ -7,9 +7,7 @@
   let slidesTimeout;
 
   function fetchHomePhotos() {
-    // return new Promise((resolve, reject) => {
     return firestore.doc('home/home').get();
-    // });
   }
 
   onMount(() => {
@@ -25,7 +23,7 @@
   });
 
   function showSlides(slideIndex) {
-    const slides = document.getElementsByClassName('mySlides');
+    const slides = document.getElementsByClassName('slideshow-image');
 
     if (slideIndex === -1) slideIndex = slides.length - 1;
 
@@ -144,6 +142,11 @@
     z-index: 1;
     width: 100%;
     height: 100%;
+  }
+
+  .slideshow-image {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
   }
 
   .mySlides {

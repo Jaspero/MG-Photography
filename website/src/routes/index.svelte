@@ -1,29 +1,81 @@
 <script>
-  import {onMount} from 'svelte';
+  import {goto} from '@sapper/app';
+  import {onMount, afterUpdate, onDestroy} from 'svelte';
+  import {firestore} from '../firebase';
+  let photos = [];
 
-  let slideIndex = 0;
+  let slidesTimeout;
+
+  function fetchHomePhotos() {
+    // return new Promise((resolve, reject) => {
+    return firestore.doc('home/home').get();
+    // });
+  }
 
   onMount(() => {
-    showSlides();
+    fetchHomePhotos()
+      .then(data => {
+        photos = data.data()['Home Photos'];
+        setTimeout(() => showSlides(-1), 200);
+      })
+      .catch(err => {
+        console.log('Landing photos could not be fetched!', err);
+        goto('unavailable');
+      });
   });
 
-  function showSlides() {
-    try {
-      let i;
-      let slides = document.getElementsByClassName('mySlides');
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.opacity = 0;
-      }
+  function showSlides(slideIndex) {
+    const slides = document.getElementsByClassName('mySlides');
 
-      slideIndex = (slideIndex + 1) % slides.length;
+    if (slideIndex === -1) slideIndex = slides.length - 1;
 
-      slides[slideIndex].style.opacity = 1;
-      setTimeout(showSlides, 7000);
-    } catch (e) {}
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.opacity = 0;
+      slides[i].firstChild.style.opacity = 0;
+    }
+
+    slideIndex = (slideIndex + 1) % slides.length;
+
+    slides[slideIndex].style.opacity = 1;
+    slides[slideIndex].firstChild.style.opacity = 1;
+
+    slidesTimeout = setTimeout(() => showSlides(slideIndex), 7000);
   }
+
+  onDestroy(() => {
+    // Stop slideshow
+    clearTimeout(slidesTimeout);
+  });
 </script>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  @font-face {
+    font-family: 'Particle';
+    src: url('../fonts/Particle-Regular.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Simplo';
+    src: url('../fonts/Simplo-Light.otf') format('opentype');
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'Simplo';
+    src: url('../fonts/Simplo-Medium.otf') format('opentype');
+    font-weight: bold;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Particle';
+    background: black;
+  }
+
   .slideshow-text-title {
     font-size: 4em;
     color: white;
@@ -59,6 +111,13 @@
     color: black;
   }
 
+  a {
+    text-decoration: none;
+    color: white;
+    padding: 1em;
+    display: inline-block;
+  }
+
   .slideshow {
     width: 100vw;
     height: 100vh;
@@ -87,14 +146,10 @@
     height: 100%;
   }
 
-  .slideshow-image {
+  .mySlides {
     opacity: 0;
 
-    -webkit-transition: opacity 1s ease-in-out;
-    -moz-transition: opacity 1s ease-in-out;
-    -ms-transition: opacity 1s ease-in-out;
-    -o-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1.5s ease-in-out;
 
     position: absolute;
     top: 0;
@@ -141,35 +196,10 @@
 
   <!-- Slideshow images -->
   <div class="slideshow-images">
-
-    <!-- Full-width images with number and caption text -->
-    <div class="slideshow-image fade firstPhoto">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-1.jpg"/>
-    </div>
-
-    <div class="slideshow-image fade">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-2.jpg"/>
-    </div>
-
-    <div class="slideshow-image fade">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-3.jpg"/>
-    </div>
-
-    <div class="slideshow-image fade">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-4.jpg"/>
-    </div>
-
-    <div class="slideshow-image fade">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-5.jpg"/>
-    </div>
-
-    <div class="slideshow-image fade">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-5.jpg"/>
-    </div>
-
-    <div class="slideshow-image fade">
-      <img class="slideshow-image-inner" alt="" src="landing/landing-web-7.jpg"/>
-    </div>
-
+    {#each photos as photo}
+      <div class="slideshow-image fade">
+        <img class="slideshow-image-inner" alt="" src={photo} />
+      </div>
+    {/each}
   </div>
 </section>

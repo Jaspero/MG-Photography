@@ -9,8 +9,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set Public Environment
+          name: Set Public Client Environment
           command: echo export const ENV_CONFIG=$PUBLIC_CONFIG > client/src/env-config.ts
+      - run:
+          name: Set Public Website Environment
+          command: echo export const ENV_CONFIG=$PUBLIC_CONFIG > website/env-config.js
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}-{{ checksum "client/package-lock.json" }}-{{ checksum "functions/package-lock.json" }}
@@ -21,6 +24,9 @@ jobs:
           name: Install Client dependencies
           command: yes | npm --prefix client ci || true
       - run:
+          name: Install Website dependencies
+          command: yes | npm --prefix website ci || true
+      - run:
           name: Install Function dependencies
           command: yes | npm --prefix functions ci || true
       - save_cache:
@@ -28,6 +34,7 @@ jobs:
           paths:
             - node_modules
             - client/node_modules
+            - website/node_modules
             - functions/node_modules
       - run:
           name: Linting
@@ -43,11 +50,13 @@ jobs:
           paths:
             - package.json
             - client/package.json
+            - __sapper__
             - functions/package.json
             - package-lock.json
             - firebase.json
             - functions/node_modules
             - functions/lib
+            - functions/__sapper__
             - firestore.indexes.json
             - firestore.rules
             - storage.rules

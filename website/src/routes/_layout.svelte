@@ -1,26 +1,33 @@
 <script>
-  export let segment;
+	import Nav from '../components/Nav.svelte';
 
+	export let segment;
+
+	import {goto} from "@sapper/app";
+	import { firestore } from "../firebase";
+  import { categories } from "../stores";
   import Footer from '../components/Footer.svelte'
-  import {firestore} from '../firebase';
-  import {categories} from '../stores';
-  import {onMount} from 'svelte';
 
-  let categoriesFetch = fetchCategories();
+	import { onMount } from "svelte";
 
-  async function fetchCategories() {
-    await firestore
-      .collection('categories')
-      .get()
-      .then(data => {
-        categories.set(data.docs.map(doc => doc.data()));
-      });
+	let categoriesFetch = fetchCategories();
 
-    return;
-  }
+	async function fetchCategories() {
+		await firestore.collection("categories")
+        .get()
+        .then(data => {
+			categories.set(data.docs.map(doc => doc.data()));
+        }).catch(err => {
+			console.log("Categories could not be fetched!");
+			goto("unavailable");
+		});
+
+		return;
+	}
 </script>
 
 <style>
+
   header {
     position: absolute;
     z-index: 2;
@@ -45,18 +52,18 @@
     position: relative;
     z-index: 1;
   }
+  
+  main {
+		position: relative;
+		max-width: 56em;
+		background-color: black;
+		padding: 2em;
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
 </style>
 
-<header class="{segment === undefined ? 'home' : ''}">
-  <a class="logo" href=".">Mislav Gelenčir</a>
-  <nav>
-    <a href="portraits">Portraits</a>
-    <a href="events">Events</a>
-    <a href="music">Music</a>
-    <a href="real-estate">Real-estate</a>
-    <a href="videos">Videos</a>
-  </nav>
-</header>
+<Nav {segment}/>
 
 <main>
   {#await categoriesFetch}
@@ -67,3 +74,4 @@
 </main>
 
 <Footer segment={segment}/>
+

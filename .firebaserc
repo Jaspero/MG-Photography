@@ -4,6 +4,9 @@
       "hosting": {
         "cms": [
           "mg-photography-cms"
+        ],
+        "website": [
+          "mg-photography-98d6d"
         ]
       }
     }

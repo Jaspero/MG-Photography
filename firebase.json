@@ -5,6 +5,17 @@
   },
   "hosting": [
     {
+      "target": "website",
+      "public": "public/website",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "ssr"
+        }
+      ]
+    },
+    {
       "target": "cms",
       "public": "public/cms",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],

@@ -1,82 +1,35 @@
 <style>
-    .slideshow-text-title {
-        font-size: 6em;
-        color: white;
-        position: absolute;
-        top: -65rem;
-        left: 10rem;
-        font-weight: normal;
-        line-height: .8em;
-    }
 
-    a {
-        text-decoration: none;
-        color: white;
-        padding: 1em;
-        display: inline-block;
-    }
+.contact-hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    padding: 1em;
+    background-image: url("../landing/landing-web-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-    .slideshow {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        z-index: 1;
-    }
+.contact-hero-title {
+    max-width: 700px;
+    margin: auto;
+    width: 100%;
+}
 
-    .slideshow-text {
-        position: absolute;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.contact-hero-link {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
 
-    .slideshow-images {
-        position: absolute;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-    }
-
-    .logo {
-        left: 3rem;
-    }
-
-
-    /* Hide the images by default */
-
-    .about-me-pic {
-        object-fit: cover;
-    }
-
-    @keyframes fade {
-        from {
-            opacity: .3;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    .title {
-        margin: 0;
-        position: absolute;
-        width: 100%;
-        height: 50%;
-        display: flex;
-        align-items: center;
-    }
-
-    .title::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: -100px;
-        transform: translateY(-50%);
-        width: 350px;
-        height: 350px;
-        border-radius: 50%;
-        background: #eee;
-        z-index: -1;
-    }
 </style>
+
+    <section class="contact-hero">
+
+        <h1 class="contact-hero-title">ABOUT ME<br>CONTACT</h1>
+        
+        <a class="contact-hero-link" href=".">
+            <span>FOR ANY REQUESTS</span>
+            <span>E-MAIL ME</span>
+        </a>
+    </section>

@@ -52,16 +52,14 @@
     font-family: Simplo;
     font-size: .5vw;
     color: #363636;
-    animation: pero 3s up;
   }
 
   .footer-banner-title-talk {
     display: block;
     font-family: JosefinSans;
-    font-size: 7vw;
+    font-size: 6vw;
     font-weight: normal;
     color: #363636;
-    animation: pero 4.3s;
   }
 
   .footer-banner-title-if {
@@ -69,7 +67,6 @@
     font-size: 5vw;
     font-weight: normal;
     color: #363636;
-    animation: pero 5s;
   }
 
   .footer-banner-title-collaborations {
@@ -77,7 +74,6 @@
     font-size: 5vw;
     font-weight: normal;
     color: #363636;
-    animation: pero 6.7s;
   }
 
   .footer-banner-paragraph {
@@ -97,7 +93,6 @@
     color: #00B1D2;
     display: inline-block;
     border-bottom: 2px solid #00B1D2;
-    animation: pero 6s;
   }
 
   .footer-banner-title-any > span {
@@ -111,13 +106,7 @@
     max-width: 50vw;
   }
 
-  .contact-me {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background: #e8e8e8;
-    padding: 5em 1em;
-  }
+
 
   .footer-contact {
     height: 300px;

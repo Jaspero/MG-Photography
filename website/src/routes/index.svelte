@@ -1,32 +1,30 @@
 <script>
-  import { onMount } from "svelte";
+  import {onMount} from 'svelte';
 
   let slideIndex = 0;
 
   onMount(() => {
-	showSlides();
+    showSlides();
   });
 
   function showSlides() {
-	  try {
-		let i;
-		let slides = document.getElementsByClassName("mySlides");
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.opacity = 0;
-		}
-		
-		slideIndex = (slideIndex + 1) % (slides.length);
+    try {
+      let i;
+      let slides = document.getElementsByClassName('mySlides');
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.opacity = 0;
+      }
 
-		slides[slideIndex].style.opacity = 1;
-		setTimeout(showSlides, 7000);
-	  } catch(e) {
+      slideIndex = (slideIndex + 1) % slides.length;
 
-	  }
+      slides[slideIndex].style.opacity = 1;
+      setTimeout(showSlides, 7000);
+    } catch (e) {}
   }
 </script>
 
 <style>
-.slideshow-text-title {
+  .slideshow-text-title {
     font-size: 4em;
     color: white;
     position: absolute;
@@ -36,13 +34,13 @@
     font-weight: normal;
     font-family: 'Particle';
     width: 700px;
-}
+  }
 
-.slideshow-text-cta {
+  .slideshow-text-cta {
     top: 30vh;
+    font-family: 'Particle';
     left: 65vw;
     position: absolute;
-
     width: 350px;
     height: 350px;
     background: rgba(110, 103, 103, 0.4);
@@ -54,14 +52,14 @@
     font-size: 1.5em;
     color: white;
     transition: 0.2s;
-}
+  }
 
-.slideshow-text-cta:hover {
+  .slideshow-text-cta:hover {
     background: #eee;
     color: black;
-}
+  }
 
-.slideshow {
+  .slideshow {
     width: 100vw;
     height: 100vh;
     position: relative;
@@ -70,24 +68,26 @@
     top: 0;
     left: 0;
     background-color: black;
-}
+  }
 
-.slideshow-text {
+  .slideshow-text {
     position: absolute;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+    width: 100%;
+    height: 100%;
+  }
 
-.slideshow-images {
+  .slideshow-images {
     position: absolute;
     z-index: 1;
     width: 100%;
     height: 100%;
-}
+  }
 
-.mySlides {
+  .slideshow-image {
     opacity: 0;
 
     -webkit-transition: opacity 1s ease-in-out;
@@ -96,26 +96,25 @@
     -o-transition: opacity 1s ease-in-out;
     transition: opacity 1s ease-in-out;
 
-
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
+  }
 
-.mySlides > img {
+  .slideshow-image-inner {
     height: 100%;
     width: 100%;
     object-fit: cover;
     position: fixed;
     top: 0;
     left: 0;
-}
+  }
 
-.firstPhoto {
+  .firstPhoto {
     opacity: 1;
-}
+  }
 </style>
 
 <svelte:head>
@@ -137,74 +136,40 @@
       <br />
       look good
     </h1>
-    <a href="#" class="slideshow-text-cta">
-      Contact me
-      <br />
-      About me
-    </a>
+    <a href="about" class="slideshow-text-cta">Contact me</a>
   </div>
 
   <!-- Slideshow images -->
   <div class="slideshow-images">
 
     <!-- Full-width images with number and caption text -->
-    <div class="mySlides fade firstPhoto">
-      <img alt="" src="landing/landing-web-1.jpg" style="width:100%" />
+    <div class="slideshow-image fade firstPhoto">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-1.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-2.jpg" style="width:100%" />
+    <div class="slideshow-image fade">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-2.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-3.jpg" style="width:100%" />
+    <div class="slideshow-image fade">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-3.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-4.jpg" style="width:100%" />
+    <div class="slideshow-image fade">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-4.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-5.jpg" style="width:100%" />
+    <div class="slideshow-image fade">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-5.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-6-version-1.jpg"
-        style="width:100%" />
+    <div class="slideshow-image fade">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-5.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-7.jpg" style="width:100%" />
+    <div class="slideshow-image fade">
+      <img class="slideshow-image-inner" alt="" src="landing/landing-web-7.jpg"/>
     </div>
 
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-8-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-9-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-10-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-11-version-1.jpg"
-        style="width:100%" />
-    </div>
   </div>
 </section>

@@ -22,10 +22,13 @@
 
 <style>
   header {
-    position: relative;
+    position: absolute;
     z-index: 2;
     text-transform: uppercase;
     display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
   header.home {
 	  color: white;

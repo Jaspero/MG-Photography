@@ -1,6 +1,6 @@
 <script>
   import Gallery from '../components/Gallery.svelte';
-  let title="events";
+  let title="EVENTS";
   let images="images";
 </script>
 

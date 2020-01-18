@@ -1,7 +1,7 @@
 <script>
   export let segment;
 
-  import { categories } from "../stores";
+  import { categories } from '../stores';
 </script>
 
 <style>
@@ -25,6 +25,7 @@
 
   header {
     display: flex;
+    color: black;
     justify-content: space-between;
     position: fixed;
     top: 0;
@@ -34,6 +35,10 @@
     width: 100%;
     font-family: "Simplo";
     font-size: 1.3em;
+  }
+
+  .home, .about {
+    color: white !important;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   }
 
@@ -43,7 +48,6 @@
 
   a {
     text-decoration: none;
-    color: white;
     padding: 1.2em;
     display: inline-block;
 	font-family: "Simplo" !important;
@@ -56,7 +60,7 @@
 }
 </style>
 
-<header>
+<header class="{segment || 'home'}">
   <a href="/" class="logo">MISLAV GELENČIR</a>
 
   <ul class="show-desktop hide-desktop" id="nav">

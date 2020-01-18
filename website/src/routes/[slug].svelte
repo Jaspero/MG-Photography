@@ -1,8 +1,9 @@
 <script>
-  import {goto, stores} from "@sapper/app";
-  import {derived} from "svelte/store";
-  import {categories} from "../stores";
-  import {onDestroy} from "svelte";
+  import {goto, stores} from '@sapper/app';
+  import Gallery from '../components/Gallery.svelte';
+  import {derived} from 'svelte/store';
+  import {categories} from '../stores';
+  import {onDestroy} from 'svelte';
 
   // Object containing whole site data, false = not loaded, undefined = not existant
   let site = false;
@@ -14,7 +15,7 @@
         return false;
       }
 
-      if (page.path === "/" || page.path === "/contact") return page.path;
+      if (page.path === '/' || page.path === '/contact') return page.path;
 
       return category.find(it => it.name.toLowerCase() === page.params.slug);
     }
@@ -23,8 +24,8 @@
       site = siteData;
     } else if (siteData === undefined) {
       site = undefined;
-      goto("404");
-    } else if (typeof siteData === "string") {
+      goto('404');
+    } else if (typeof siteData === 'string') {
       goto(siteData);
     }
   });
@@ -48,7 +49,7 @@
 
   /* Clear floats after image containers */
   .row::after {
-    content: "";
+    content: '';
     clear: both;
     display: table;
   }
@@ -93,7 +94,7 @@
 
 <div class="white-bg">
   {#if site}
-    <h1>{site.name}</h1>
+    <Gallery title="{site.name}" images="{site.images}"/>
 
     <a href="/contact" class="slideshow-text-cta">
       Contact me

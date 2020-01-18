@@ -4,23 +4,6 @@
 
 <style>
 @font-face {
-    font-family: 'Particle';
-    src: url('../fonts/Particle-Regular.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'Simplo';
-    src: url('../fonts/Simplo-Light.otf') format('opentype');
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: 'Simplo';
-    src: url('../fonts/Simplo-Medium.otf') format('opentype');
-    font-weight: bold;
-}
-
-@font-face {
     font-family: 'JosefinSans';
     src: url('../fonts/JosefinSans-Light_1.ttf') format('truetype');
     font-weight: normal;

@@ -47,33 +47,6 @@
 </script>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  @font-face {
-    font-family: 'Particle';
-    src: url('../fonts/Particle-Regular.otf') format('opentype');
-  }
-
-  @font-face {
-    font-family: 'Simplo';
-    src: url('../fonts/Simplo-Light.otf') format('opentype');
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: 'Simplo';
-    src: url('../fonts/Simplo-Medium.otf') format('opentype');
-    font-weight: bold;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Particle';
-    background: black;
-  }
-
   .slideshow-text-title {
     font-size: 4em;
     color: white;

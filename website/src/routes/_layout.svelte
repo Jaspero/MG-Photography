@@ -61,9 +61,6 @@
 
 <main>
     {#await fetchCategories()}
-        <p>
-            bla bla bal
-        </p>
     {:then number}
         <slot></slot>
     {/await}

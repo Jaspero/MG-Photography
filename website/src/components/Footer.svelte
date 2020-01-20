@@ -1,177 +1,80 @@
-<script>
-  export let segment;
-</script>
-
 <style>
-@font-face {
-    font-family: 'JosefinSans';
-    src: url('../fonts/JosefinSans-Light_1.ttf') format('truetype');
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: 'JosefinSans';
-    src: url('../fonts/JosefinSans-Bold_1.ttf') format('truetype');
-    font-weight: bold;
-}
-  .footer.home {
-    display: none;
-  }
   .footer-banner {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background: #E8E8E8;
-    padding: 2em 1em;
+    position: relative;
+    z-index: 1; /* Gallery negative margin is overlapping this section */
+    background: #e8e8e8;
+    padding: 4em 1em;
+    text-align: center;
   }
- 
   .footer-banner-title {
-    margin: 0 auto 2em;
-    text-align: center;
-    max-width: 50vw;
-}
-  .footer-banner-title-hey {
+    font-family: 'Simplo', sans-serif;
+  }
+  .footer-banner-title-1 {
     display: block;
-    font-family: Simplo;
-    font-size: .5vw;
-    color: #363636;
+    margin-bottom: 1em;
   }
-
-  .footer-banner-title-talk {
+  .footer-banner-title-2 {
     display: block;
-    font-family: JosefinSans;
-    font-size: 6vw;
-    font-weight: normal;
-    color: #363636;
+    font-size: 3em;
   }
-
-  .footer-banner-title-if {
-    font-family: JosefinSans;
-    font-size: 5vw;
-    font-weight: normal;
-    color: #363636;
+  .footer-banner-title-3 {
+    display: block;
+    font-size: 2em;
   }
-
-  .footer-banner-title-collaborations {
-    font-family: JosefinSans;
-    font-size: 5vw;
-    font-weight: normal;
-    color: #363636;
+  .footer-banner-title-4 {
+    border-bottom: .1em solid;
+    letter-spacing: .5em;
+    color: #00b1d2;
   }
-
+  .footer-banner-title-5 {
+    font-size: 2em;
+  }
   .footer-banner-paragraph {
-    font-family: Simplo;
-    font-size: 0.8vw;
-    margin: auto;
-    text-align: center;
-    max-width: 15vw;
-    letter-spacing: 1px;
-    color: #2c2c2c;
+    max-width: 25em;
+    margin: 2em auto;
+    letter-spacing: .1em;
   }
-
-  .footer-banner-title-any {
-    font-family: JosefinSans;
-    font-size: 1vw;
-    font-weight: bold;
-    color: #00B1D2;
-    display: inline-block;
-    border-bottom: 2px solid #00B1D2;
-  }
-
-  .footer-banner-title-any > span {
-    display: inline-block;
-    padding: 0 .5em;
-  }
-
-  .contact-me-title {
-    margin: 0 auto 5em;
-    text-align: center;
-    max-width: 50vw;
-  }
-
-
 
   .footer-contact {
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    padding: 4em 1em;
     background: #d9d9d9;
-    padding: 1em;
+    text-align: center;
   }
-
   .footer-contact-title {
-    margin-top: 3em;
-    padding: 0.5em;
-    font-family: Simplo;
-    font-size: 2vw;
-    margin: auto;
-    text-align: center;
-    max-width: 15vw;
-    letter-spacing: 1px;
+    font-family: 'Simplo', sans-serif;
+    font-size: 3em;
+    color: #00b1d2;
   }
-
   .footer-contact-paragraph {
-    font-family: Simplo;
-    font-size: 0.7vw;
-    margin: auto;
-    text-align: center;
-    max-width: 20vw;
-    letter-spacing: 6px;
+    max-width: 25em;
+    margin: 2em auto;
+    letter-spacing: .1em;
   }
-
-  .youtube {
-    font-family: Simplo light;
-    font-size: 0.7vw;
-    margin: left;
-    text-align: left;
-    display: inline-block;
-    text-decoration: none;
-  }
-
-  .instagram {
-    font-family: Simplo light;
-    font-size: 0.7vw;
-    display: inline-block;
-    text-decoration: none;
-    margin-left: 1em;
-  }
-
   .footer-contact-social {
-    display: inline-block;
-    text-decoration: none;
-    margin: left;
+    margin: 0 1em;
+    text-decoration: underline;
+  }
+  @media (max-width: 900px) {
+    .footer-banner-title-3 {
+      display: inline;
+    }
   }
 </style>
 
-<footer class="footer {segment === undefined ? 'home' : ''}">
-  <section class="footer-banner">
-    <h2 class="footer-banner-title">
-      <span class="footer-banner-title-hey">HEY</span>
-      <span class="footer-banner-title-talk">Talk to me</span>
-      <span class="footer-banner-title-if">if you have some ideas for</span>
-      <span class="footer-banner-title-any">
-        <span>A</span>
-        <span>N</span>
-        <span>Y</span>
-      </span>
-      <span class="footer-banner-title-collaborations">collaborations</span>
-    </h2>
-    <p class="footer-banner-paragraph">
-      WHETHER YOU ARE READY TO BOOK ME AS YOUR PHOTOGRAPHER, HAVE SOME QUESTIONS
-      OR WANT TO CHAT ABOUT YOUR IDEAS AND SEE IF I WOULD BE THE RIGHT FIT FOR
-      YOU, GIVE ME A CALL, SEND ME A MESSAGE OR AN E-MAIL AND I'LL GET BACK TO
-      YOU AS SOON AS POSSIBLE.
-    </p>
-  </section>
+<footer class="footer-banner">
+  <h2 class="footer-banner-title">
+    <span class="footer-banner-title-1">HEY</span>
+    <span class="footer-banner-title-2">Talk to me</span>
+    <span class="footer-banner-title-3">if you have some ideas for</span>
+    <a href="contact" class="footer-banner-title-4">ANY</a>
+    <span class="footer-banner-title-5">collaborations</span>
+  </h2>
+  <p class="footer-banner-paragraph">Whether you are ready to book me as your photographer, have some questions or want to chat about your ideas and see if I would be the right fit for you, give me a call, send me a message or an e-mail and I'll get back to you as soon as possible.</p>
+</footer>
 
-  <section class="footer-contact">
-    <h2 class="footer-contact-title">CONTACT ME</h2>
-    <p class="footer-contact-paragraph">PLEASE GET IN CONTACT TO DISCUSS HOW I CAN HELP YOU WITH YOUR REQUIREMENTS.</p>
-    <p class="footer-contact-paragraph">MAKE SURE TO VISIT MY SITE AGAIN.</p>
-    <div class="footer-contact-social">
-      <a href="." class="youtube">Youtube</a>
-      <a href="." class="instagram">Instagram</a>
-    </div>
-  </section>
+<footer class="footer-contact">
+  <a href="contact" class="footer-contact-title">Contact me</a>
+  <p class="footer-contact-paragraph">Please get in contact to discuss how I can help you with your requirements.</p>
+  <a class="footer-contact-social" href="contact">Youtube</a>
+  <a class="footer-contact-social" href="contact">Instagram</a>
 </footer>

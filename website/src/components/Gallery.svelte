@@ -7,16 +7,14 @@
   .gallery {
     display: flex;
     flex-wrap: wrap;
-    max-width: 80vw;
-    margin: 4em auto;
+    max-width: var(--container);
+    margin: 60px auto -25em;
   }
-
   .gallery-col {
     width: 50%;
     position: relative;
     padding-bottom: 66%;
   }
-
   .gallery-col-image {
     position: absolute;
     top: 20px;
@@ -25,34 +23,39 @@
     height: calc(100% - 40px);
     object-fit: cover;
   }
-
   .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
     transform: translateY(-50%);
   }
-
   .gallery-col-title {
-    margin: 0;
     position: absolute;
-    width: 100%;
     height: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
-    font-size: 7em;
-    line-height: .8;
-    color: #6E6E6E;
+    font-size: 4em;
+    padding-left: 0.25em;
   }
-
   .gallery-col-title::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: -100px;
-    transform: translateY(-50%);
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    background: #eee;
     z-index: -1;
+    top: 50%;
+    left: -15%;
+    height: 0;
+    width: 50%;
+    padding-top: 50%;
+    background: rgba(0,0,0,.1);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  @media (max-width: 1600px) {
+    .gallery {
+      margin: 60px auto -30vw;
+    }
+    .gallery-col-title {
+      font-size: 2em;
+      padding-left: 0.5em;
+    }
   }
 </style>
 
@@ -60,40 +63,9 @@
   <div class="gallery-col">
     <h1 class="gallery-col-title">{title}</h1>
   </div>
-  <a class="gallery-col" href="landing/landing-web-1.jpg">
-    <img
-      class="gallery-col-image"
-      src="landing/landing-web-1.jpg"
-      alt="Image1" />
-  </a>
-  <a class="gallery-col" href="landing/landing-web-2.jpg">
-    <img
-      class="gallery-col-image"
-      src="landing/landing-web-2.jpg"
-      alt="Image2" />
-  </a>
-  <a class="gallery-col" href="landing/landing-web-3.jpg">
-    <img
-      class="gallery-col-image"
-      src="landing/landing-web-3.jpg"
-      alt="Image3" />
-  </a>
-  <a class="gallery-col" href="landing/landing-web-1.jpg">
-    <img
-      class="gallery-col-image"
-      src="landing/landing-web-1.jpg"
-      alt="Image3" />
-  </a>
-  <a class="gallery-col" href="landing/landing-web-2.jpg">
-    <img
-      class="gallery-col-image"
-      src="landing/landing-web-2.jpg"
-      alt="Image3" />
-  </a>
-  <a class="gallery-col" href="landing/landing-web-3.jpg">
-    <img
-      class="gallery-col-image"
-      src="landing/landing-web-3.jpg"
-      alt="Image3" />
-  </a>
+  {#each images as image}
+    <a class="gallery-col" href={image}>
+      <img class="gallery-col-image" src={image} alt=""/>
+    </a>
+  {/each}
 </section>

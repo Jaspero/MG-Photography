@@ -37,7 +37,7 @@
     {/await}
 </main>
 
-{#if segment === 'undefined'}
+{#if segment !== 'undefined'}
     <Footer/>
 {/if}
 

@@ -76,6 +76,8 @@
         max-width: 23em;
         margin-bottom: 3em;
         margin-top: 3em;
+        font-style: oblique;
+        font-style: bold;
     }
 
     .contact-content-paragraph {
@@ -86,17 +88,16 @@
         margin-left: 3em;
         margin-bottom: 7em;
     }
-    .contact-pictures-grid {
+
+    .contact-pictures {
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+        max-width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 20px;
         align-items: start;
         justify-items: start;
-    }
-    .contact-picture {
-        border: 1px solid #ccc;
-        box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
-        max-width: 100%;
     }
 </style>
 
@@ -123,12 +124,9 @@
     </section>
 
     <div class="contact-pictures">
-        <section class="contact-pictures-grid">
-            <img class="contact-picture" src="static/contact-page-pic-1.png" alt="contact-me-image-1">
-            <img class="contact-picture" src="static/contact-page-pic-2.png" alt="contact-me-image-2">
-            <img class="contact-picture" src="static/contact-page-pic-3.png" alt="contact-me-image-3">
-        </section>
+        <img src="static/contact-page-pic-1.png">
     </div>
 </div>
+
 
 

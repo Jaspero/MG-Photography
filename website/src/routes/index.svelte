@@ -96,6 +96,7 @@
   }
   .slideshow-images {
     position: absolute;
+    overflow-x: hidden;
     top: 0;
     left: 0;
     z-index: 1;

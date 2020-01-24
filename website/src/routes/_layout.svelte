@@ -7,10 +7,13 @@
 
     export let segment;
 
+    let categoriesFetch = fetchCategories();
+
     async function fetchCategories() {
         await firestore.collection('categories')
                 .get()
                 .then(data => {
+
                     categories.set(data.docs.map(doc => doc.data()));
                 })
                 .catch(err => {
@@ -30,7 +33,7 @@
 <Header segment={segment}/>
 
 <main>
-    {#await fetchCategories}
+    {#await categoriesFetch}
         <p>Loading...</p>
     {:then number}
         <slot></slot>

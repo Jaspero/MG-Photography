@@ -21,7 +21,10 @@
         font-size: 4em;
         padding-left: 1em;
     }
-    .contact-hero-title-2 { font-size: 2.45em; }
+    .contact-hero-title-2 {
+        font-size: 2.45em;
+        margin-left: 1.55em;
+    }
     .contact-hero-link {
         position: absolute;
         bottom: 1em;
@@ -67,6 +70,7 @@
         letter-spacing: .5em;
         color: #00b1d2;
         font-family: 'Simplo', sans-serif;
+        margin-left: 21%;
     }
 
     .contact-content-title-3 {
@@ -78,6 +82,7 @@
         margin-top: 3em;
         font-style: oblique;
         font-style: bold;
+        margin-left: 11%;
     }
 
     .contact-content-paragraph {
@@ -87,17 +92,17 @@
         font-size: .8em;
         margin-left: 3em;
         margin-bottom: 7em;
+        margin-left: 14%;
     }
 
     .contact-pictures {
         border: 1px solid #ccc;
-        box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
-        max-width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: -32%;
+        margin-right: 15%;
+        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
+        max-width: 50%;
         grid-gap: 20px;
-        align-items: start;
-        justify-items: start;
+        float: right
     }
 </style>
 
@@ -121,12 +126,8 @@
             <span class="contact-content-title-3">“When work, commitment and pleasure all become one and you reach that deep well where passion lives, nothing is impossible.”</span>
             <p class="contact-content-paragraph">I’m Mislav Gelencir, a passionate professional portrait, event and proprety photographer. Worked for many years in a different field until I finally understood that only photography would satisfy me as a life-long career. Photography is a lifestyle choice for me and I’ve allowed its creative drive and adventurous spirit to work with me. My goal as a photographer is to look past the face we present to capture something deeper. Sometimes this results in creating a bright, eye-catching image, and sometimes a more poetic study of the face. Nothing motivates me more than the special bond I create with my valued clients.</p>
         </h2>
+        <section class="contact-pictures">
+            <img src="/contact-page-pic-1.png" alt="pic-1">
+        </section>
     </section>
-
-    <div class="contact-pictures">
-        <img src="static/contact-page-pic-1.png">
-    </div>
 </div>
-
-
-

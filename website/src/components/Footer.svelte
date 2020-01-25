@@ -9,10 +9,7 @@
   .footer-banner-title {
     font-family: 'Simplo', sans-serif;
   }
-  .footer-banner-title-1 {
-    display: block;
-    margin-bottom: 1em;
-  }
+
   .footer-banner-title-2 {
     display: block;
     font-size: 3em;
@@ -63,7 +60,6 @@
 
 <footer class="footer-banner">
   <h2 class="footer-banner-title">
-    <span class="footer-banner-title-1">HEY</span>
     <span class="footer-banner-title-2">Talk to me</span>
     <span class="footer-banner-title-3">if you have some ideas for</span>
     <a href="contact" class="footer-banner-title-4">ANY</a>

@@ -2,14 +2,13 @@
   import {goto} from '@sapper/app';
   import {onMount, afterUpdate, onDestroy} from 'svelte';
   import {firestore} from '../firebase';
+
   let photos = [];
 
   let slidesTimeout;
 
   function fetchHomePhotos() {
-    // return new Promise((resolve, reject) => {
     return firestore.doc('home/home').get();
-    // });
   }
 
   onMount(() => {
@@ -25,7 +24,7 @@
   });
 
   function showSlides(slideIndex) {
-    const slides = document.getElementsByClassName('mySlides');
+    const slides = document.getElementsByClassName('slideshow-image');
 
     if (slideIndex === -1) slideIndex = slides.length - 1;
 
@@ -49,129 +48,81 @@
 </script>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
-  @font-face {
-    font-family: 'Particle';
-    src: url('../fonts/Particle-Regular.otf') format('opentype');
-  }
-
-  @font-face {
-    font-family: 'Simplo';
-    src: url('../fonts/Simplo-Light.otf') format('opentype');
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: 'Simplo';
-    src: url('../fonts/Simplo-Medium.otf') format('opentype');
-    font-weight: bold;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Particle';
+  .slideshow {
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
     background: black;
+    padding: 1em;
   }
-
-  .slideshow-text-title {
-    font-size: 6em;
+  .slideshow-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
     color: white;
-    position: absolute;
-    top: 28vh;
-    left: 10vw;
-    line-height: 0.8;
-    font-weight: normal;
-
-    white-space: nowrap;
-
-    font-family: 'Particle';
   }
-
+  .slideshow-text-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.8;
+  }
+  .slideshow-text-title-1 { font-size: 6.5em; }
+  .slideshow-text-title-2 { font-size: 5.2em; }
+  .slideshow-text-title-3 { font-size: 5.3em; }
+  .slideshow-text-title-4 { font-size: 3.0em; }
+  .slideshow-text-title-5 { font-size: 3.2em; }
   .slideshow-text-cta {
-    top: 30vh;
-    left: 65vw;
-    position: absolute;
-
-    width: 350px;
-    height: 350px;
-    background: rgba(110, 103, 103, 0.4);
+    font-size: 1.5em;
+    margin: 1em 0;
+    width: 8em;
+    height: 8em;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: right;
     border-radius: 50%;
-    font-size: 1.5em;
-    color: white;
-    transition: 0.2s;
-
-    font-family: 'Particle';
+    transition: .2s;
+    background: rgba(255,255,255,.1);
   }
-
   .slideshow-text-cta:hover {
-    background: #eee;
     color: black;
+    background: rgba(255,255,255,.8);
   }
-
-  a {
-    text-decoration: none;
-    color: white;
-    padding: 1em;
-    display: inline-block;
-  }
-
-  .slideshow {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    z-index: 1;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: black;
-  }
-
-  .slideshow-text {
-    position: absolute;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .slideshow-images {
     position: absolute;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
     z-index: 1;
     width: 100%;
     height: 100%;
   }
-
-  .mySlides {
+  .slideshow-image {
     opacity: 0;
-
-    transition: opacity 1.5s ease-in-out;
-
+    transition: 1.5s;
+  }
+  .slideshow-image-inner {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .mySlides > img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    transition: opacity 1.5s ease-in-out;
-
-    opacity: 0;
+  }
+  @media (max-width: 900px) {
+    .slideshow-text {
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .slideshow-text-title {
+      font-size: 1.2em;
+    }
   }
 </style>
 
@@ -180,94 +131,21 @@
 </svelte:head>
 
 <section class="slideshow">
-
-  <!-- Slideshow text -->
   <div class="slideshow-text">
     <h1 class="slideshow-text-title">
-      Making
-      <br />
-      people,
-      <br />
-      events
-      <br />
-      and properties
-      <br />
-      look good
+      <span class="slideshow-text-title-1">I make</span>
+      <span class="slideshow-text-title-2">people,</span>
+      <span class="slideshow-text-title-3">events,</span>
+      <span class="slideshow-text-title-4">& properties</span>
+      <span class="slideshow-text-title-5">look good</span>
     </h1>
-    <a href="/contact" class="slideshow-text-cta">
-      Contact me
-      <br />
-      About me
-    </a>
+    <a href="contact" class="slideshow-text-cta">Contact me</a>
   </div>
-
-  <!-- Slideshow images -->
   <div class="slideshow-images">
-
     {#each photos as photo}
-      <div class="mySlides">
-        <img alt="" src={photo} style="width: 100%" />
+      <div class="slideshow-image">
+        <img class="slideshow-image-inner" alt="" src={photo} />
       </div>
     {/each}
-
-    <!-- Full-width images with number and caption text -->
-    <!-- <div class="mySlides fade firstPhoto">
-      <img alt="" src="landing/landing-web-1.jpg" style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-2.jpg" style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-3.jpg" style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-4.jpg" style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-5.jpg" style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-6-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img alt="" src="landing/landing-web-7.jpg" style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-8-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-9-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-10-version-1.jpg"
-        style="width:100%" />
-    </div>
-
-    <div class="mySlides fade">
-      <img
-        alt=""
-        src="landing/landing-web-11-version-1.jpg"
-        style="width:100%" />
-    </div> -->
   </div>
 </section>

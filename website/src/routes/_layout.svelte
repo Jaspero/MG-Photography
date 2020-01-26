@@ -1,47 +1,46 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+    import { goto } from '@sapper/app';
+    import { firestore } from '../firebase';
+    import { categories } from '../stores';
+    import Header from '../components/Header.svelte';
+    import Footer from '../components/Footer.svelte'
 
-	export let segment;
+    export let segment;
 
-	import {goto} from "@sapper/app";
-	import { firestore } from "../firebase";
-	import { categories } from "../stores";
+    let categoriesFetch = fetchCategories();
 
-	import { onMount } from "svelte";
+    async function fetchCategories() {
+        await firestore.collection('categories')
+                .get()
+                .then(data => {
 
-	let categoriesFetch = fetchCategories();
-
-	async function fetchCategories() {
-		await firestore.collection("categories")
-        .get()
-        .then(data => {
-			categories.set(data.docs.map(doc => doc.data()));
-        }).catch(err => {
-			console.log("Categories could not be fetched!");
-			goto("unavailable");
-		});
-
-		return;
-	}
+                    categories.set(data.docs.map(doc => doc.data()));
+                })
+                .catch(err => {
+                    console.log('Categories could not be fetched!');
+                    goto('unavailable');
+                });
+    }
 </script>
 
 <style>
-	main {
-		position: relative;
-		max-width: 56em;
-		background-color: black;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
+    main {
+        position: relative;
+        z-index: 1;
+    }
 </style>
 
-<Nav {segment}/>
+<Header segment={segment}/>
 
 <main>
-	{#await categoriesFetch}
-		<p>Loading...</p>
-	{:then number}
-		<slot></slot>
-	{/await}
+    {#await categoriesFetch}
+        <p>Loading...</p>
+    {:then number}
+        <slot></slot>
+    {/await}
 </main>
+
+{#if segment !== 'undefined'}
+    <Footer/>
+{/if}
+

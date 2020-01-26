@@ -6,8 +6,18 @@ service cloud.firestore {
 
   match /databases/{database}/documents {
 
+    match /categories/{category=**} {
+      allow read: if true;
+      allow write: if access(database, 'home', 'write') || resource.id == request.auth.uid
+    }
+
+    match /home/{home=**} {
+      allow read: if true;
+      allow write: if access(database, 'home', 'write') || resource.id == request.auth.uid
+    }
+
     match /users/{user=**} {
-      allow read, write, delete: if access(database, 'users', 'read') || resource.id == request.auth.uid;
+      allow read, write: if access(database, 'users', 'read') || resource.id == request.auth.uid;
     }
 
     match /modules/{module=**} {

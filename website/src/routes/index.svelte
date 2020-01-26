@@ -1,6 +1,6 @@
 <script>
   import {goto} from '@sapper/app';
-  import {onMount, afterUpdate, onDestroy} from 'svelte';
+  import {onMount, onDestroy} from 'svelte';
   import {firestore} from '../firebase';
 
   let photos = [];

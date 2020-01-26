@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: flauc/firebase
     environment:
-      NPM_VERSION: "6.9.0"
+      NPM_VERSION: "6.12.1"
     steps:
       - checkout
       - run:

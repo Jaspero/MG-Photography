@@ -28,13 +28,37 @@
         position: relative;
         z-index: 1;
     }
+
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100vw;
+        height: 100vh;
+
+        background-color: black;
+        color: whitesmoke;
+        z-index: 99;
+
+        opacity: 1;
+
+        padding-top: 40vh;
+        text-align: center;
+
+        font-size: 150%;
+    }
 </style>
 
 <Header segment={segment}/>
 
 <main>
     {#await categoriesFetch}
-        <p>Loading...</p>
+
+        <div class="loader">
+            <h1>Loading...</h1>
+        </div>
+
     {:then number}
         <slot></slot>
     {/await}

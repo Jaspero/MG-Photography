@@ -35,7 +35,7 @@
   <a class="header-link" href="/">Mislav Gelenčir</a>
   <nav>
     {#each $categories.reverse() as category}
-      <a class="header-link" href={category.name.toLowerCase()}>{category.name}</a>
+      <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
     <a class="header-link" href="contact">contact</a>
   </nav>

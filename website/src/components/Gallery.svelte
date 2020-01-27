@@ -89,7 +89,7 @@
 
 <section class="gallery">
     <div class="gallery-col {orientation == 'landscape' ? 'pd-b-10':''}">
-        <h1 class="gallery-col-title">{title}</h1>
+        <h1 class="gallery-col-title">{title.replace('-', ' ')}</h1>
     </div>
     {#each images as image}
         <a class="{orientation == 'landscape' ? 'gallery-row' : 'gallery-col'}" href={image}>

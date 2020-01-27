@@ -19,9 +19,10 @@
       return category.find(it => it.name.toLowerCase() === page.params.slug);
     }
   ).subscribe(siteData => {
+    console.log(siteData);
     if (siteData) {
-      site = siteData;
-      console.log(site)
+      if (typeof siteData === 'string') goto(siteData);
+      else site = siteData;
     } else if (siteData === undefined) {
       site = undefined;
       goto('404');

@@ -10,7 +10,6 @@
     let categoriesFetch = fetchCategories();
 
     async function fetchCategories() {
-      console.log(segment);
         await firestore.collection('categories')
                 .get()
                 .then(data => {

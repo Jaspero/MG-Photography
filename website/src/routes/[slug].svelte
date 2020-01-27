@@ -14,6 +14,7 @@
       if (!page || !category) {
         return false;
       }
+      console.log(category);
       if (page.path === '/' || page.path === '/contact') return page.path;
 
       return category.find(it => it.name.toLowerCase() === page.params.slug);
@@ -34,5 +35,5 @@
 </script>
 
 {#if site}
-  <Gallery title="{site.name}" images="{site.gallery}"/>
+  <Gallery title="{site.name}" images="{site.gallery}" orientation="{site.type}"/>
 {/if}

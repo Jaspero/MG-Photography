@@ -1,8 +1,9 @@
 <script>
     export let title = '';
     export let images = '';
+    export let orientation = 'portrait';
 
-    let orientation = 'portrait';
+    // let orientation = 'portrait';
 </script>
 
 <style>

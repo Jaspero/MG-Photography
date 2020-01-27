@@ -21,6 +21,7 @@
   ).subscribe(siteData => {
     if (siteData) {
       site = siteData;
+      console.log(site)
     } else if (siteData === undefined) {
       site = undefined;
       goto('404');

@@ -50,6 +50,7 @@
 <style>
   .slideshow {
     width: 100vw;
+    overflow-x: hidden !important;
     min-height: 100vh;
     position: relative;
     display: flex;
@@ -96,7 +97,7 @@
   }
   .slideshow-images {
     position: absolute;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     top: 0;
     left: 0;
     z-index: 1;

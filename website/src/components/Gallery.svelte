@@ -2,7 +2,7 @@
     export let title = '';
     export let images = '';
 
-    let orientation = 'landscape';
+    let orientation = 'portrait';
 </script>
 
 <style>
@@ -19,10 +19,24 @@
         padding-bottom: 66%;
     }
 
+    .pd-b-10 {
+        margin-top: 10%;
+        padding-bottom: 25%;
+    }
+
     .gallery-row {
         width: 100%;
         position: relative;
-        padding-bottom: 66%;
+        padding-bottom: 65%;
+    }
+
+    .gallery-row-image {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        object-fit: cover;
     }
 
     .gallery-col-image {
@@ -75,18 +89,12 @@
 </style>
 
 <section class="gallery">
-    <div class="gallery-col">
+    <div class="gallery-col {orientation == 'landscape' ? 'pd-b-10':''}">
         <h1 class="gallery-col-title">{title}</h1>
     </div>
     {#each images as image}
-        {#if orientation === "landscape"}
-            <a class="gallery-row" href={image}>
-                <img class="gallery-col-image" src={image} alt=""/>
-            </a>
-        {:else}
-            <a class="gallery-col" href={image}>
-                <img class="gallery-col-image" src={image} alt=""/>
-            </a>
-        {/if}
+        <a class="{orientation == 'landscape' ? 'gallery-row' : 'gallery-col'}" href={image}>
+            <img class="{orientation == 'landscape' ? 'gallery-row-image' : 'gallery-col-image'}" src={image} alt=""/>
+        </a>
     {/each}
 </section>

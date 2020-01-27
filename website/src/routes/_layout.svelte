@@ -10,6 +10,7 @@
     let categoriesFetch = fetchCategories();
 
     async function fetchCategories() {
+      console.log(segment);
         await firestore.collection('categories')
                 .get()
                 .then(data => {
@@ -40,7 +41,7 @@
     {/await}
 </main>
 
-{#if segment !== 'undefined'}
+{#if (segment !== 'undefined' && segment)}
     <Footer/>
 {/if}
 

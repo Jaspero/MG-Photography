@@ -57,8 +57,12 @@
         width: 100%;
         display: flex;
         align-items: center;
-        font-size: 4em;
+        font-size: 8.5em;
         padding-left: 0.25em;
+        font-family: 'Simplo';
+        text-transform: uppercase;
+        color: #6E6E6E;
+        line-height: 80%;
     }
 
     .gallery-col-title::after {

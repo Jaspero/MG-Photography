@@ -9,7 +9,7 @@
         display: flex;
         flex-wrap: wrap;
         max-width: var(--container);
-        margin: 60px auto -25em;
+        margin: 60px 25px -25em;
     }
 
     .gallery-col {
@@ -19,7 +19,6 @@
     }
 
     .pd-b-10 {
-        margin-top: 10%;
         padding-bottom: 25%;
     }
 
@@ -31,7 +30,7 @@
 
     .gallery-row-image {
         position: absolute;
-        top: 10px;
+        top: -300px;
         left: 20px;
         width: calc(100% - 40px);
         height: calc(100% - 40px);
@@ -40,7 +39,8 @@
 
     .gallery-col-image {
         position: absolute;
-        top: 20px;
+        top: 192px;
+        bottom: 45px;
         left: 20px;
         width: calc(100% - 40px);
         height: calc(100% - 40px);
@@ -79,19 +79,37 @@
         transform: translateY(-50%);
     }
 
-    @media (max-width: 1600px) {
+    @media (min-width: 1300px) {
         .gallery {
             margin: 60px auto -30vw;
         }
 
+        .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
+            transform: translateY(-50%);
+        }
+
         .gallery-col-title {
-            font-size: 2em;
+            font-size: 9em;
             padding-left: 0.5em;
         }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: var(--container);
+            margin: 40px auto -25em;
+        }
+
+        .gallery-col {
+            width: 50%;
+            position: relative;
+            padding-bottom: 66%;
+        }
     }
+
 </style>
 
-<section class="gallery">
+<section class="gallery {orientation}">
     <div class="gallery-col {orientation == 'landscape' ? 'pd-b-10':''}">
         <h1 class="gallery-col-title">{title.replace('-', ' ')}</h1>
     </div>

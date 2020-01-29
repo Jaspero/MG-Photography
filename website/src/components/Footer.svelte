@@ -5,6 +5,7 @@
     background: #e8e8e8;
     padding: 4em 1em;
     text-align: center;
+    margin-top: 125px;
   }
   .footer-banner-title {
     font-family: 'Simplo', sans-serif;

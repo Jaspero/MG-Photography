@@ -29,14 +29,29 @@
     display: inline-block;
     padding: 1em;
   }
+  .nav-desktop {
+    display: block;
+  }
+  .nav-mobile {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .nav-desktop {display: none;}
+    .nav-mobile {display: block;}
+  }
 </style>
 
 <header class="header {segment}">
   <a class="header-link" href="/">Mislav Gelenčir</a>
-  <nav>
+  <nav-desktop class="nav-desktop">
     {#each $categories.reverse() as category}
       <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
-    <a class="header-link" href="contact">contact</a>
-  </nav>
+  </nav-desktop>
+
+  <nav-mobile class="nav-mobile">
+    {#each $categories.reverse() as category}
+      <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
+    {/each}
+  </nav-mobile>
 </header>

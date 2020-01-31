@@ -9,13 +9,14 @@
         display: flex;
         flex-wrap: wrap;
         max-width: var(--container);
-        margin: 60px 25px -25em;
+        margin: 60px auto -25em;
+        margin-bottom: 300px;
     }
 
     .gallery-col {
         width: 50%;
         position: relative;
-        padding-bottom: 66%;
+        padding-bottom: 90px;
     }
 
     .pd-b-10 {

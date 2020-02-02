@@ -4,7 +4,7 @@
         min-height: 100vh;
         display: flex;
         padding: 1em;
-        background-image: url("../landing/landing-web-1.jpg");
+        background-image: url("/landing/contact-landing-picture.jpg");
         background-repeat: no-repeat;
         background-size: cover;
     }

@@ -14,14 +14,15 @@
       if (!page || !category) {
         return false;
       }
-
       if (page.path === '/' || page.path === '/contact') return page.path;
 
       return category.find(it => it.name.toLowerCase() === page.params.slug);
     }
   ).subscribe(siteData => {
+    console.log(siteData);
     if (siteData) {
-      site = siteData;
+      if (typeof siteData === 'string') goto(siteData);
+      else site = siteData;
     } else if (siteData === undefined) {
       site = undefined;
       goto('404');
@@ -34,5 +35,5 @@
 </script>
 
 {#if site}
-  <Gallery title="{site.name}" images="{site.gallery}"/>
+  <Gallery title="{site.name}" images="{site.gallery}" orientation="{site.type}"/>
 {/if}

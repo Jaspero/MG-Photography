@@ -9,114 +9,95 @@
         display: flex;
         flex-wrap: wrap;
         max-width: var(--container);
-        margin: 60px auto -25em;
-        margin-bottom: 300px;
+        margin: 60px auto;
     }
-
     .gallery-col {
         width: 50%;
         position: relative;
-        padding-bottom: 90px;
+        padding-bottom: 66%;
     }
-
-    .pd-b-10 {
-        padding-bottom: 25%;
-    }
-
-    .gallery-row {
+    .gallery-col.landscape {
         width: 100%;
-        position: relative;
-        padding-bottom: 65%;
+        padding-bottom: 66%;
+        transform: translateY(0);
     }
-
-    .gallery-row-image {
-        position: absolute;
-        top: -300px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
-        object-fit: cover;
+    .gallery-col.landscape:nth-child(1){
+        padding-bottom: 33%;
     }
-
-    .gallery-col-image {
-        position: absolute;
-        top: 192px;
-        bottom: 45px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
-        object-fit: cover;
+    .gallery-col.landscape:nth-child(2n - 1):not(:nth-child(1)) {
+        transform: translateY(0);
     }
-
     .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
         transform: translateY(-50%);
     }
-
     .gallery-col-title {
         position: absolute;
-        height: 50%;
+        height: 100%;
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         font-size: 8.5em;
         padding-left: 0.25em;
+        padding-top: 60px;
         font-family: 'Simplo';
         text-transform: uppercase;
         color: #6E6E6E;
         line-height: 80%;
     }
-
     .gallery-col-title::after {
         content: '';
         position: absolute;
         z-index: -1;
-        top: 50%;
-        left: -15%;
-        height: 0;
-        width: 50%;
-        padding-top: 50%;
+        top: -20px;
+        left: 0px;
+        height: 350px;
+        width: 350px;
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
-        transform: translateY(-50%);
     }
-
-    @media (min-width: 1300px) {
-        .gallery {
-            margin: 60px auto -30vw;
-        }
-
-        .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
-            transform: translateY(-50%);
-        }
-
+    .gallery-col-image {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        object-fit: cover;
+    }
+    @media (max-width: 1600px) {
         .gallery-col-title {
-            font-size: 9em;
-            padding-left: 0.5em;
+            font-size: 10vw;
         }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: var(--container);
-            margin: 40px auto -25em;
-        }
-
+    }
+    @media (max-width: 600px) {
         .gallery-col {
-            width: 50%;
-            position: relative;
+            width: 100%;
+            padding-bottom: 133%;
+        }
+        .gallery-col:nth-child(1),
+        .gallery-col:nth-child(1).landscape {
+            padding-bottom: 60px;
+            padding-top: 60px;
+        }
+        .gallery-col.landscape {
             padding-bottom: 66%;
         }
+        .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
+            transform: translateY(0);
+        }
+        .gallery-col-title {
+            position: static;
+            font-size: 2em;
+        }
     }
-
 </style>
 
-<section class="gallery {orientation}">
-    <div class="gallery-col {orientation == 'landscape' ? 'pd-b-10':''}">
+<section class="gallery">
+    <div class="gallery-col" class:landscape={orientation === 'landscape'}>
         <h1 class="gallery-col-title">{title.replace('-', ' ')}</h1>
     </div>
     {#each images as image}
-        <a class="{orientation == 'landscape' ? 'gallery-row' : 'gallery-col'}" href={image}>
-            <img class="{orientation == 'landscape' ? 'gallery-row-image' : 'gallery-col-image'}" src={image} alt=""/>
+        <a class="gallery-col" href={image} class:landscape={orientation === 'landscape'}>
+            <img class="gallery-col-image" src={image} alt=""/>
         </a>
     {/each}
 </section>

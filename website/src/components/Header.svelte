@@ -29,29 +29,49 @@
     display: inline-block;
     padding: 1em;
   }
-  .nav-desktop {
-    display: block;
-  }
-  .nav-mobile {
+  .header-menu {
     display: none;
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 1em;
+    color: inherit;
   }
-  @media screen and (max-width: 768px) {
-    .nav-desktop {display: none;}
-    .nav-mobile {display: block;}
+  @media (max-width: 900px) {
+    .header-nav {
+      position: fixed;
+      height: 100%;
+      transition: .2s;
+      visibility: hidden;
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .header-nav.active {
+      z-index: 10;
+      visibility: visible;
+      transform: translateX(0);
+      opacity: 1;
+      border: 5px;
+    }
+    .header-menu {
+      display: block;
+    }
   }
 </style>
 
 <header class="header {segment}">
   <a class="header-link" href="/">Mislav Gelenčir</a>
-  <nav-desktop class="nav-desktop">
+  <nav class="header-nav active">
     {#each $categories.reverse() as category}
       <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
-  </nav-desktop>
-
-  <nav-mobile class="nav-mobile">
-    {#each $categories.reverse() as category}
-      <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
-    {/each}
-  </nav-mobile>
+  </nav>
+  <button class="header-menu">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-linecap="round" width="20">
+      <line x1="1" y1="1" x2="11" y2="1"/>
+      <line x1="1" y1="4" x2="11" y2="4"/>
+      <line x1="5" y1="7" x2="11" y2="7"/>
+    </svg>
+  </button>
 </header>

@@ -2,6 +2,10 @@
   export let segment;
 
   import { categories } from '../stores';
+
+  function openMenu() {
+    document.getElementsByClassName("header-nav")[0].classList.add("active")
+  }
 </script>
 
 <style>
@@ -41,21 +45,27 @@
   @media (max-width: 900px) {
     .header-nav {
       position: fixed;
+      z-index: 10;
+      right: 0;
+      top: 0;
+      background: darkslategrey;
       height: 100%;
       transition: .2s;
       visibility: hidden;
-      transform: translateX(100%);
+      transform: translate(100%, 50%);
       opacity: 0;
     }
     .header-nav.active {
-      z-index: 10;
       visibility: visible;
-      transform: translateX(0);
+      transform: translateX(0%);
       opacity: 1;
-      border: 5px;
     }
     .header-menu {
       display: block;
+    }
+    .header-link {
+      display: block;
+      margin-top: 50px;
     }
   }
 </style>
@@ -67,7 +77,7 @@
       <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
   </nav>
-  <button class="header-menu">
+  <button class="header-menu" onclick="openMenu()">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-linecap="round" width="20">
       <line x1="1" y1="1" x2="11" y2="1"/>
       <line x1="1" y1="4" x2="11" y2="4"/>

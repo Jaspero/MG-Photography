@@ -68,6 +68,28 @@
             font-size: 10vw;
         }
     }
+    @media (max-width: 1100px) {
+        .gallery-col-title {
+            font-size: 7vw;
+        }
+        .gallery-col-title {
+            font-size: 4em;
+            align-items: flex-start;
+            padding-left: 0.25em;
+            padding-top: 130px;
+            font-family: 'Simplo';
+            text-transform: uppercase;
+            color: #6E6E6E;
+            line-height: 80%;
+        }
+        .gallery-col-title::after {
+            z-index: -1;
+            top: 50px;
+            left: 0px;
+            height: 200px;
+            width: 200px;
+        }
+    }
     @media (max-width: 600px) {
         .gallery-col {
             width: 100%;

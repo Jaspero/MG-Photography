@@ -55,6 +55,17 @@
       transform: translate(100%, 50%);
       opacity: 0;
     }
+    .header-nav a{
+      color: white;
+      padding: 24px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      display: block;
+    }
+    .header-nav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
     .header-nav.active {
       visibility: visible;
       transform: translateX(0%);

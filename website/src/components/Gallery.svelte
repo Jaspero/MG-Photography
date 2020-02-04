@@ -38,7 +38,7 @@
         align-items: flex-start;
         font-size: 8.5em;
         padding-left: 0.25em;
-        padding-top: 60px;
+        padding-top: 120px;
         font-family: 'Simplo';
         text-transform: uppercase;
         color: #6E6E6E;
@@ -48,7 +48,7 @@
         content: '';
         position: absolute;
         z-index: -1;
-        top: -20px;
+        top: 15px;
         left: 0px;
         height: 350px;
         width: 350px;
@@ -86,7 +86,22 @@
         }
         .gallery-col-title {
             position: static;
-            font-size: 2em;
+            font-size: 5em;
+            display: flex;
+            align-items: flex-start;
+            padding-left: 0.25em;
+            padding-top: 40px;
+            font-family: 'Simplo';
+            text-transform: uppercase;
+            color: #6E6E6E;
+            line-height: 80%;
+        }
+        .gallery-col-title::after {
+            z-index: -1;
+            top: 25px;
+            left: 0px;
+            height: 200px;
+            width: 200px;
         }
     }
 </style>

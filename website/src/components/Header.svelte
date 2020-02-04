@@ -48,7 +48,7 @@
       z-index: 10;
       right: 0;
       top: 0;
-      background: darkslategrey;
+      background: #6E6E6E;
       height: 100%;
       transition: .2s;
       visibility: hidden;
@@ -65,7 +65,6 @@
     }
     .header-link {
       display: block;
-      margin-top: 50px;
     }
   }
 </style>

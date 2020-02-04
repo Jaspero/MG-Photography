@@ -104,6 +104,32 @@
         grid-gap: 20px;
         float: right
     }
+
+    @media (max-width: 1100px) {
+        .contact-hero-title-1 {
+            font-size: 3em;
+            padding-left: 1em;
+        }
+        .contact-hero-title-2 {
+            font-size: 1.75em;
+            margin-left: 1.70em;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .contact-hero-title-1 {
+            font-size: 2em;
+            padding-left: 1em;
+        }
+        .contact-hero-title-2 {
+            font-size: 1.25em;
+            margin-left: 1.55em;
+        }
+        .contact-hero {
+        background-position: center;
+        }
+    }
+
 </style>
 
 <section class="contact-hero">

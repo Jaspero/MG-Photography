@@ -1,7 +1,50 @@
 <script>
+    import { fade } from 'svelte/transition';
+
     export let title = '';
     export let images = '';
     export let orientation = 'portrait';
+
+    let photoViewer = {
+        active: false,
+        src: '',
+        index: 0
+    };
+
+    function viewPhoto(i) {
+
+      if (i < 0) {
+        i = images.length - 1;
+      }
+
+      if (i === images.length) {
+        i = 0;
+      }
+
+      photoViewer.src = images[i];
+      photoViewer.active = true;
+      photoViewer.index = i;
+    }
+
+    function closePhotoViewer() {
+      photoViewer.src = '';
+      photoViewer.active = false;
+      photoViewer.index = 0;
+    }
+
+    document.onkeydown = checkArrows;
+
+    function checkArrows(e) {
+        e = e || window.event;
+        if (!photoViewer.active) return;
+        if (e.keyCode === 27) {
+            closePhotoViewer();
+        } else if (e.keyCode === 37) {
+            viewPhoto(photoViewer.index - 1);
+        } else if (e.keyCode === 39) {
+            viewPhoto(photoViewer.index + 1);
+        }
+    }
 </script>
 
 <style>
@@ -89,15 +132,129 @@
             font-size: 2em;
         }
     }
+
+    .viewer .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+
+        background-color: black;
+        opacity: 0.75;
+    }
+
+    .viewer .photo {
+        position: fixed;
+        height: 90%;
+        width: auto;
+        left: 50%;
+        top: 50%;
+        padding: 10px;
+        background-color: white;
+
+        transform: translate(-50%, -50%);
+    }
+
+    .viewer .photo img {
+        height: 100%;
+        width: auto;
+    }
+
+    /* Close button */
+    .close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+    }
+    .close:hover {
+        opacity: 1;
+
+        cursor: pointer;
+    }
+    .close:before, .close:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: #333;
+    }
+    .close:before {
+        transform: rotate(45deg);
+    }
+    .close:after {
+        transform: rotate(-45deg);
+    }
+
+    .arrow {
+        position: absolute;
+
+        top: calc(50% - 25px);
+
+        background-color: white;
+        width: 50px;
+        line-height:50px;
+        text-align: center;
+        border-radius: 100%;
+        transition: all 0.15s;
+    }
+
+    .arrow:hover {
+        cursor: pointer;
+
+        width: 56px;
+        line-height: 56px;
+
+        top: calc(50% - 28px);
+    }
+
+    .left-arrow {
+        left: 15px;
+    }
+    .left-arrow:hover {
+        left: 12px;
+    }
+
+    .right-arrow {
+        right: 15px;
+    }
+    .right-arrow:hover {
+        right: 12px;
+    }
+
+    .unselectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 </style>
 
 <section class="gallery">
     <div class="gallery-col" class:landscape={orientation === 'landscape'}>
         <h1 class="gallery-col-title">{title.replace('-', ' ')}</h1>
     </div>
-    {#each images as image}
-        <a class="gallery-col" href={image} class:landscape={orientation === 'landscape'}>
+    {#each images as image, i}
+        <a class="gallery-col" on:click={() => viewPhoto(i)} class:landscape={orientation === 'landscape'}>
             <img class="gallery-col-image" src={image} alt=""/>
         </a>
     {/each}
 </section>
+
+{#if photoViewer.active}
+    <div class="viewer" transition:fade={{duration: 200}}>
+        <div class="overlay" on:click={closePhotoViewer}></div>
+        <div class="photo unselectable">
+            <img src={photoViewer.src} alt="Active photo" />
+            <span class="close" on:click={closePhotoViewer}></span>
+            <span class="arrow left-arrow" on:click={() => viewPhoto(photoViewer.index - 1)}>&lt;</span>
+            <span class="arrow right-arrow" on:click={() => viewPhoto(photoViewer.index + 1)}>&gt;</span>
+        </div>
+    </div>
+{/if}

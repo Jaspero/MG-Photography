@@ -125,6 +125,15 @@
       font-size: 1.2em;
     }
   }
+
+  .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 </style>
 
 <svelte:head>
@@ -132,7 +141,7 @@
 </svelte:head>
 
 <section class="slideshow">
-  <div class="slideshow-text">
+  <div class="slideshow-text unselectable">
     <h1 class="slideshow-text-title">
       <span class="slideshow-text-title-1">I make</span>
       <span class="slideshow-text-title-2">people,</span>

@@ -1,6 +1,7 @@
 <style>
     .contact-hero {
         position: relative;
+        z-index: 1;
         min-height: 100vh;
         display: flex;
         padding: 1em;
@@ -8,8 +9,18 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+    .contact-hero-layer {
+        background-color: rgba(60, 60, 60, 0.7);
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
     .contact-hero-title {
         display: flex;
+        z-index: 3;
         flex-direction: column;
         max-width: var(--container);
         line-height: 0.8;
@@ -19,14 +30,17 @@
     }
     .contact-hero-title-1 {
         font-size: 4em;
+        z-index: 3;
         padding-left: 1em;
     }
     .contact-hero-title-2 {
         font-size: 2.45em;
+        z-index: 3;
         margin-left: 1.55em;
     }
     .contact-hero-link {
         position: absolute;
+        z-index: 3;
         bottom: 1em;
         right: 1em;
         display: flex;
@@ -37,8 +51,14 @@
         text-align: center;
         color: white;
     }
-    .contact-hero-link-1 { font-size: 1em; }
-    .contact-hero-link-2 { font-size: 1.95em; }
+    .contact-hero-link-1 {
+        font-size: 1em;
+        z-index: 3;
+    }
+    .contact-hero-link-2 {
+        font-size: 1.95em;
+        z-index: 3;
+    }
 
     .about-me-content {
         position: relative;
@@ -65,8 +85,9 @@
         font-family: 'Simplo', sans-serif;
     }
     .contact-content-title-2 {
-        margin: 1em 45em 1em 1em;
+        margin: 1em 1em 1em 1em;
         border-bottom: .1em solid;
+        float: left;
         letter-spacing: .5em;
         color: #00b1d2;
         font-family: 'Simplo', sans-serif;
@@ -79,7 +100,7 @@
         font-family: 'Simplo', sans-serif;
         max-width: 23em;
         margin-bottom: 3em;
-        margin-top: 3em;
+        margin-top: 7em;
         font-style: oblique;
         font-style: bold;
         margin-left: 11%;
@@ -90,19 +111,14 @@
         letter-spacing: .1em;
         font-family: 'Simplo', sans-serif;
         font-size: .8em;
-        margin-left: 3em;
-        margin-bottom: 7em;
         margin-left: 14%;
     }
-
-    .contact-pictures {
-        border: 1px solid #ccc;
-        margin-top: -32%;
-        margin-right: 15%;
+    .contact-content-picture {
         box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
-        max-width: 50%;
-        grid-gap: 20px;
-        float: right
+        max-width: 3%;
+        position: flex;
+        float: right;
+        z-index: 5;
     }
 
     @media (max-width: 1100px) {
@@ -110,6 +126,7 @@
             font-size: 3em;
             padding-left: 1em;
         }
+
         .contact-hero-title-2 {
             font-size: 1.75em;
             margin-left: 1.70em;
@@ -118,18 +135,26 @@
 
     @media (max-width: 600px) {
         .contact-hero-title-1 {
-            font-size: 2em;
+            font-size: 3.25em;
             padding-left: 1em;
+            color: white;
         }
         .contact-hero-title-2 {
-            font-size: 1.25em;
-            margin-left: 1.55em;
+            font-size: 2em;
+            color: white;
         }
         .contact-hero {
         background-position: center;
         }
+        .contact-hero-link {
+            flex: border-box;
+            border-bottom: .1em solid;
+            line-height: 1;
+            padding-bottom: .25em;
+            text-align: center;
+            color: white;
+        }
     }
-
 </style>
 
 <section class="contact-hero">
@@ -142,6 +167,8 @@
         <span class="contact-hero-link-1">FOR ANY REQUESTS</span>
         <span class="contact-hero-link-2">E-MAIL ME</span>
     </a>
+    <div class="contact-hero-layer">
+    </div>
 </section>
 
 <div class="about-me-content">
@@ -150,10 +177,10 @@
             <span class="contact-content-title-1">MEET ME</span>
             <a href="contact" class="contact-content-title-2">ABOUT ME</a>
             <span class="contact-content-title-3">“When work, commitment and pleasure all become one and you reach that deep well where passion lives, nothing is impossible.”</span>
-            <p class="contact-content-paragraph">I’m Mislav Gelencir, a passionate professional portrait, event and proprety photographer. Worked for many years in a different field until I finally understood that only photography would satisfy me as a life-long career. Photography is a lifestyle choice for me and I’ve allowed its creative drive and adventurous spirit to work with me. My goal as a photographer is to look past the face we present to capture something deeper. Sometimes this results in creating a bright, eye-catching image, and sometimes a more poetic study of the face. Nothing motivates me more than the special bond I create with my valued clients.</p>
+            <p class="contact-content-paragraph">I’m Mislav Gelencir, a passionate professional portrait, event and property photographer. Worked for many years in a different field until I finally understood that only photography would satisfy me as a life-long career. Photography is a lifestyle choice for me and I’ve allowed its creative drive and adventurous spirit to work with me. My goal as a photographer is to look past the face we present to capture something deeper. Sometimes this results in creating a bright, eye-catching image, and sometimes a more poetic study of the face. Nothing motivates me more than the special bond I create with my valued clients.</p>
         </h2>
-        <section class="contact-pictures">
-            <img src="/contact-page-pic-1.png" alt="pic-1">
-        </section>
     </section>
+</div>
+<div class="contact-content-picture">
+    <img src="/contact-page-pic-1.png" alt="MG">
 </div>

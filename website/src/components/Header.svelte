@@ -82,7 +82,7 @@
 
 <header class="header {segment}">
   <a class="header-link" href="/">Mislav Gelenčir</a>
-  <nav class="header-nav active">
+  <nav class="header-nav">
     {#each $categories.reverse() as category}
       <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}

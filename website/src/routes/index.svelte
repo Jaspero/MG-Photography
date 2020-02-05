@@ -74,7 +74,7 @@
     flex-direction: column;
     line-height: 0.8;
   }
-  .slideshow-text-title-1 { font-size: 6.5em; }
+  .slideshow-text-title-1 { font-size: 5.2em; }
   .slideshow-text-title-2 { font-size: 5.2em; }
   .slideshow-text-title-3 { font-size: 5.3em; }
   .slideshow-text-title-4 { font-size: 3.0em; }
@@ -143,9 +143,9 @@
 <section class="slideshow">
   <div class="slideshow-text unselectable">
     <h1 class="slideshow-text-title">
-      <span class="slideshow-text-title-1">I make</span>
+      <span class="slideshow-text-title-1">Making</span>
       <span class="slideshow-text-title-2">people,</span>
-      <span class="slideshow-text-title-3">events,</span>
+      <span class="slideshow-text-title-3">events</span>
       <span class="slideshow-text-title-4">& properties</span>
       <span class="slideshow-text-title-5">look good</span>
     </h1>

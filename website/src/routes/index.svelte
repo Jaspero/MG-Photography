@@ -82,8 +82,8 @@
   .slideshow-text-cta {
     font-size: 1.5em;
     margin: 1em 0;
-    width: 15em;
-    height: 15em;
+    width: 10em;
+    height: 10em;
     display: flex;
     align-items: center;
     justify-content: center;

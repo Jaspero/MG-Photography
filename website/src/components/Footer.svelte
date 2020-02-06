@@ -30,6 +30,7 @@
     max-width: 25em;
     margin: 2em auto;
     letter-spacing: .1em;
+    text-transform: lowercase;
   }
 
   .footer-contact {
@@ -46,6 +47,7 @@
     max-width: 25em;
     margin: 2em auto;
     letter-spacing: .1em;
+    text-transform: lowercase;
   }
   .footer-contact-social {
     margin: 0 1em;

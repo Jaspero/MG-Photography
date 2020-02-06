@@ -34,6 +34,6 @@ export const cms = {
   // Rest
   exportData,
   importData,
-  api
+  // api
 
 };

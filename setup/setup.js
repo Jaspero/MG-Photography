@@ -292,7 +292,7 @@ const serviceAccount = require('./serviceAccountKey.json');
  */
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://jaspero-jms.firebaseio.com'
+  databaseURL: 'https://mg-photography-cms.firebaseio.com'
 });
 
 async function exec() {

@@ -172,6 +172,7 @@
 
     .viewer .overlay {
         position: fixed;
+        z-index: 4;
         width: 100%;
         height: 100%;
         top: 0;
@@ -183,11 +184,12 @@
 
     .viewer .photo {
         position: fixed;
+        z-index: 5;
         height: 90%;
         width: auto;
-        left: 50%;
-        top: 50%;
-        padding: 10px;
+        left: calc(50% + 1px);
+        top: calc(50% + 1px);
+        border: 1px solid black;
         background-color: white;
 
         transform: translate(-50%, -50%);
@@ -196,6 +198,10 @@
     .viewer .photo img {
         height: 100%;
         width: auto;
+    }
+
+    img {
+        pointer-events: none;
     }
 
     /* Close button */
@@ -232,43 +238,32 @@
 
         top: calc(50% - 25px);
 
+        cursor: pointer;
+
         background-color: white;
         width: 50px;
         line-height:50px;
         text-align: center;
         border-radius: 100%;
-        transition: all 0.15s;
+        transition: .15s;
+
+        transform-origin: center;
     }
 
     .arrow:hover {
-        cursor: pointer;
-
-        width: 56px;
-        line-height: 56px;
-
-        top: calc(50% - 28px);
+        transform: scale(1.1);
     }
 
     .left-arrow {
         left: 15px;
     }
-    .left-arrow:hover {
-        left: 12px;
-    }
 
     .right-arrow {
         right: 15px;
     }
-    .right-arrow:hover {
-        right: 12px;
-    }
 
     .unselectable {
-        -webkit-touch-callout: none;
         -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
         user-select: none;
     }
 </style>
@@ -279,7 +274,10 @@
     </div>
     {#each images as image, i}
         <a class="gallery-col" on:click={() => viewPhoto(i)} class:landscape={orientation === 'landscape'}>
-            <img class="gallery-col-image" src={image} alt=""/>
+            <img class="gallery-col-image" src={image} alt="" ondrag="return false"
+                 ondragstart="return false"
+                 galleryimg="no"
+                 onmousedown="return false" />
         </a>
     {/each}
 </section>
@@ -288,7 +286,10 @@
     <div class="viewer" transition:fade={{duration: 200}}>
         <div class="overlay" on:click={closePhotoViewer}></div>
         <div class="photo unselectable">
-            <img src={photoViewer.src} alt="Active photo" />
+            <img src={photoViewer.src} alt="Active photo" ondrag="return false"
+                 ondragstart="return false"
+                 galleryimg="no"
+                 onmousedown="return false" />
             <span class="close" on:click={closePhotoViewer}></span>
             <span class="arrow left-arrow" on:click={() => viewPhoto(photoViewer.index - 1)}>&lt;</span>
             <span class="arrow right-arrow" on:click={() => viewPhoto(photoViewer.index + 1)}>&gt;</span>

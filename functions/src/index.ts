@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 import {createUser} from './callable/create-user';
 import {removeUser} from './callable/remove-user';
-import {api} from './rest/api';
 import {exportData} from './rest/export-data';
 import {importData} from './rest/import-data';
 import {fileCreated} from './triggers/file-created';
@@ -33,7 +32,6 @@ export const cms = {
 
   // Rest
   exportData,
-  importData,
+  importData
   // api
-
 };

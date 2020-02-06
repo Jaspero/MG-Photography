@@ -1,7 +1,50 @@
 <script>
+    import { fade } from 'svelte/transition';
+
     export let title = '';
     export let images = '';
     export let orientation = 'portrait';
+
+    let photoViewer = {
+        active: false,
+        src: '',
+        index: 0
+    };
+
+    function viewPhoto(i) {
+
+      if (i < 0) {
+        i = images.length - 1;
+      }
+
+      if (i === images.length) {
+        i = 0;
+      }
+
+      photoViewer.src = images[i];
+      photoViewer.active = true;
+      photoViewer.index = i;
+    }
+
+    function closePhotoViewer() {
+      photoViewer.src = '';
+      photoViewer.active = false;
+      photoViewer.index = 0;
+    }
+
+    document.onkeydown = checkArrows;
+
+    function checkArrows(e) {
+        e = e || window.event;
+        if (!photoViewer.active) return;
+        if (e.keyCode === 27) {
+            closePhotoViewer();
+        } else if (e.keyCode === 37) {
+            viewPhoto(photoViewer.index - 1);
+        } else if (e.keyCode === 39) {
+            viewPhoto(photoViewer.index + 1);
+        }
+    }
 </script>
 
 <style>
@@ -9,114 +52,247 @@
         display: flex;
         flex-wrap: wrap;
         max-width: var(--container);
-        margin: 60px auto -25em;
-        margin-bottom: 300px;
+        margin: 60px auto;
     }
-
     .gallery-col {
         width: 50%;
         position: relative;
-        padding-bottom: 90px;
+        padding-bottom: 66%;
     }
-
-    .pd-b-10 {
-        padding-bottom: 25%;
-    }
-
-    .gallery-row {
+    .gallery-col.landscape {
         width: 100%;
-        position: relative;
-        padding-bottom: 65%;
+        padding-bottom: 66%;
+        transform: translateY(0);
     }
-
-    .gallery-row-image {
-        position: absolute;
-        top: -300px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
-        object-fit: cover;
+    .gallery-col.landscape:nth-child(1){
+        padding-bottom: 33%;
     }
-
-    .gallery-col-image {
-        position: absolute;
-        top: 192px;
-        bottom: 45px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
-        object-fit: cover;
+    .gallery-col.landscape:nth-child(2n - 1):not(:nth-child(1)) {
+        transform: translateY(0);
     }
-
     .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
         transform: translateY(-50%);
     }
-
     .gallery-col-title {
         position: absolute;
-        height: 50%;
+        height: 100%;
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         font-size: 8.5em;
         padding-left: 0.25em;
+        padding-top: 120px;
         font-family: 'Simplo';
         text-transform: uppercase;
         color: #6E6E6E;
         line-height: 80%;
     }
-
     .gallery-col-title::after {
         content: '';
         position: absolute;
         z-index: -1;
-        top: 50%;
-        left: -15%;
-        height: 0;
-        width: 50%;
-        padding-top: 50%;
+        top: 15px;
+        left: 0px;
+        height: 350px;
+        width: 350px;
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
-        transform: translateY(-50%);
     }
-
-    @media (min-width: 1300px) {
-        .gallery {
-            margin: 60px auto -30vw;
-        }
-
-        .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
-            transform: translateY(-50%);
-        }
-
+    .gallery-col-image {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        object-fit: cover;
+    }
+    @media (max-width: 1600px) {
         .gallery-col-title {
-            font-size: 9em;
-            padding-left: 0.5em;
+            font-size: 10vw;
         }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: var(--container);
-            margin: 40px auto -25em;
+    }
+    @media (max-width: 1100px) {
+        .gallery-col-title {
+            font-size: 7vw;
         }
-
+        .gallery-col-title {
+            font-size: 4em;
+            align-items: flex-start;
+            padding-left: 0.25em;
+            padding-top: 130px;
+            font-family: 'Simplo';
+            text-transform: uppercase;
+            color: #6E6E6E;
+            line-height: 80%;
+        }
+        .gallery-col-title::after {
+            z-index: -1;
+            top: 50px;
+            left: 0px;
+            height: 200px;
+            width: 200px;
+        }
+    }
+    @media (max-width: 600px) {
         .gallery-col {
-            width: 50%;
-            position: relative;
+            width: 100%;
+            padding-bottom: 133%;
+        }
+        .gallery-col:nth-child(1),
+        .gallery-col:nth-child(1).landscape {
+            padding-bottom: 60px;
+            padding-top: 60px;
+        }
+        .gallery-col.landscape {
             padding-bottom: 66%;
         }
+        .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
+            transform: translateY(0);
+        }
+        .gallery-col-title {
+            position: static;
+            font-size: 5em;
+            display: flex;
+            align-items: flex-start;
+            padding-left: 0.25em;
+            padding-top: 40px;
+            font-family: 'Simplo';
+            text-transform: uppercase;
+            color: #6E6E6E;
+            line-height: 80%;
+        }
+        .gallery-col-title::after {
+            z-index: -1;
+            top: 25px;
+            left: 0px;
+            height: 200px;
+            width: 200px;
+        }
     }
 
+    .viewer .overlay {
+        position: fixed;
+        z-index: 4;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+
+        background-color: black;
+        opacity: 0.75;
+    }
+
+    .viewer .photo {
+        position: fixed;
+        z-index: 5;
+        height: 90%;
+        width: auto;
+        left: calc(50% + 1px);
+        top: calc(50% + 1px);
+        border: 1px solid black;
+        background-color: white;
+
+        transform: translate(-50%, -50%);
+    }
+
+    .viewer .photo img {
+        height: 100%;
+        width: auto;
+    }
+
+    img {
+        pointer-events: none;
+    }
+
+    /* Close button */
+    .close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+    }
+    .close:hover {
+        opacity: 1;
+
+        cursor: pointer;
+    }
+    .close:before, .close:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: #333;
+    }
+    .close:before {
+        transform: rotate(45deg);
+    }
+    .close:after {
+        transform: rotate(-45deg);
+    }
+
+    .arrow {
+        position: absolute;
+
+        top: calc(50% - 25px);
+
+        cursor: pointer;
+
+        background-color: white;
+        width: 50px;
+        line-height:50px;
+        text-align: center;
+        border-radius: 100%;
+        transition: .15s;
+
+        transform-origin: center;
+    }
+
+    .arrow:hover {
+        transform: scale(1.1);
+    }
+
+    .left-arrow {
+        left: 15px;
+    }
+
+    .right-arrow {
+        right: 15px;
+    }
+
+    .unselectable {
+        -webkit-user-select: none;
+        user-select: none;
+    }
 </style>
 
-<section class="gallery {orientation}">
-    <div class="gallery-col {orientation == 'landscape' ? 'pd-b-10':''}">
+<section class="gallery">
+    <div class="gallery-col" class:landscape={orientation === 'landscape'}>
         <h1 class="gallery-col-title">{title.replace('-', ' ')}</h1>
     </div>
-    {#each images as image}
-        <a class="{orientation == 'landscape' ? 'gallery-row' : 'gallery-col'}" href={image}>
-            <img class="{orientation == 'landscape' ? 'gallery-row-image' : 'gallery-col-image'}" src={image} alt=""/>
+    {#each images as image, i}
+        <a class="gallery-col" on:click={() => viewPhoto(i)} class:landscape={orientation === 'landscape'}>
+            <img class="gallery-col-image" src={image} alt="" ondrag="return false"
+                 ondragstart="return false"
+                 galleryimg="no"
+                 onmousedown="return false" />
         </a>
     {/each}
 </section>
+
+{#if photoViewer.active}
+    <div class="viewer" transition:fade={{duration: 200}}>
+        <div class="overlay" on:click={closePhotoViewer}></div>
+        <div class="photo unselectable">
+            <img src={photoViewer.src} alt="Active photo" ondrag="return false"
+                 ondragstart="return false"
+                 galleryimg="no"
+                 onmousedown="return false" />
+            <span class="close" on:click={closePhotoViewer}></span>
+            <span class="arrow left-arrow" on:click={() => viewPhoto(photoViewer.index - 1)}>&lt;</span>
+            <span class="arrow right-arrow" on:click={() => viewPhoto(photoViewer.index + 1)}>&gt;</span>
+        </div>
+    </div>
+{/if}

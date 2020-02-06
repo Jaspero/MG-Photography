@@ -24,10 +24,6 @@
 </script>
 
 <style>
-    main {
-        position: relative;
-        z-index: 1;
-    }
 
     .loader {
         position: fixed;

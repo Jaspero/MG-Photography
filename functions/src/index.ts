@@ -12,6 +12,7 @@ import {jsonSchemaToTypescript} from './callable/json-schema-to-typescript';
 import {documentDeleted} from './triggers/document-deleted';
 import {getExamples} from './callable/get-examples';
 import {app} from './ssr';
+import {userDocumentUpdated} from './triggers/user-document-updated';
 
 export const ssr = functions.https.onRequest(app);
 
@@ -19,6 +20,7 @@ export const cms = {
   // Triggers
   userCreated,
   userDeleted,
+  userDocumentUpdated,
   fileCreated,
   fileDeleted,
   documentDeleted,

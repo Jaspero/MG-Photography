@@ -38,6 +38,7 @@ import {AppComponent} from './app.component';
 import {ELEMENTS} from './elements/elements.const';
 import {DashboardComponent} from './modules/dashboard/dashboard.component';
 import {LoginComponent} from './modules/login/login.component';
+import {SnippetDialogComponent} from './modules/module-definition/components/snippet-dialog/snippet-dialog.component';
 import {ModuleDefinitionComponent} from './modules/module-definition/module-definition.component';
 import {DefinitionInstanceComponent} from './modules/module-definition/pages/definition-instance/definition-instance.component';
 import {DefinitionOverviewComponent} from './modules/module-definition/pages/definition-overview/definition-overview.component';
@@ -47,6 +48,7 @@ import {CheckboxComponent} from './modules/module-instance/components/fields/che
 import {ChipsComponent} from './modules/module-instance/components/fields/chips/chips.component';
 import {DateFieldComponent} from './modules/module-instance/components/fields/date-field/date-field.component';
 import {DraggableListComponent} from './modules/module-instance/components/fields/draggable-list/draggable-list.component';
+import {FileComponent} from './modules/module-instance/components/fields/file/file.component';
 import {GalleryComponent} from './modules/module-instance/components/fields/gallery/gallery.component';
 import {ImageComponent} from './modules/module-instance/components/fields/image/image.component';
 import {InputComponent} from './modules/module-instance/components/fields/input/input.component';
@@ -74,6 +76,7 @@ import {ConfirmationComponent} from './shared/components/confirmation/confirmati
 import {ExportComponent} from './shared/components/export/export.component';
 import {ImportComponent} from './shared/components/import/import.component';
 import {JsonEditorComponent} from './shared/components/json-editor/json-editor.component';
+import {LayoutSettingsComponent} from './shared/components/layout-settings/layout-settings.component';
 import {LayoutComponent} from './shared/components/layout/layout.component';
 import {SearchInputComponent} from './shared/components/search-input/search-input.component';
 import {DropzoneDirective} from './shared/directives/dropzone/dropzone.directive';
@@ -132,6 +135,7 @@ const ENTRY_COMPONENTS = [
   ChipsComponent,
   TextareaComponent,
   AutocompleteComponent,
+  FileComponent,
 
   // Segments
   SegmentComponent,
@@ -145,7 +149,9 @@ const ENTRY_COMPONENTS = [
   ExportComponent,
   SortDialogComponent,
   FilterDialogComponent,
-  FilterTagsComponent
+  FilterTagsComponent,
+  LayoutSettingsComponent,
+  SnippetDialogComponent
 ];
 
 const DIRECTIVES = [ForceDisableDirective, DropzoneDirective];

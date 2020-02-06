@@ -4,28 +4,77 @@
 const COLLECTIONS = [
   {
     name: 'settings',
-    documents: [{
-      id: 'user',
-      roles: [
+    documents: [
+      {
+        id: 'user',
+        roles: [
 
-        /**
-         * List all users that should be created initially.
-         * Initially created users can only login through
-         * third party provides (google, facebook...).
-         * If you want to create a user with email/password
-         * add an account for him in Authentication in the
-         * firebase dashboard.
-         */
-        {
-          email: 'info@jaspero.co',
-          role: 'admin'
-        },
-        {
-          email: 'antonio.stipic2@gmail.com',
-          role: 'admin'
+          /**
+           * List all users that should be created initially.
+           * Initially created users can only login through
+           * third party provides (google, facebook...).
+           * If you want to create a user with email/password
+           * add an account for him in Authentication in the
+           * firebase dashboard.
+           */
+          {
+            email: 'test@test.com',
+            role: 'user'
+          },
+        ]
+      },
+      {
+        id: 'layout',
+        navigation: {
+          items: [
+            {
+              icon: 'dashboard',
+              label: 'LAYOUT.DASHBOARD',
+              type: 'link',
+              value: '/dashboard'
+            },
+            {
+              children: [
+                {
+                  icon: 'supervised_user_circle',
+                  label: 'Users',
+                  type: 'link',
+                  value: '/m/users/overview'
+                },
+                {
+                  icon: 'vpn_key',
+                  label: 'Roles',
+                  type: 'link',
+                  value: '/m/roles/overview'
+                }
+              ],
+              icon: 'account_box',
+              label: 'LAYOUT.MANAGEMENT',
+              type: 'expandable'
+            },
+            {
+              children: [
+                {
+                  icon: 'view_module',
+                  label: 'LAYOUT.MODULES',
+                  type: 'link',
+                  value: '/module-definition/overview'
+                },
+                {
+                  icon: 'settings',
+                  label: 'LAYOUT.SETTINGS',
+                  type: 'link',
+                  value: '/settings'
+                }
+              ],
+              icon: 'dns',
+              label: 'LAYOUT.SYSTEM',
+              type: 'expandable'
+            }
+          ]
         }
-      ]
-    }]
+      }
+    ]
   },
   {
     name: 'roles',
@@ -67,8 +116,10 @@ const MODULES = [
         segments: [{
           fields: [
             '/createdOn',
+            '/id',
             '/name',
-            '/email'
+            '/email',
+            '/role'
           ]
         }]
       },
@@ -87,6 +138,11 @@ const MODULES = [
           {
             key: '/email',
             label: 'Email'
+          },
+          {
+            key: '/role',
+            label: 'Role',
+            control: true
           }
         ]
       }
@@ -101,10 +157,16 @@ const MODULES = [
         },
         createdOn: {
           type: 'number'
+        },
+        role: {
+          type: 'string'
         }
       }
     },
     definitions: {
+      id: {
+        type: 'ID'
+      },
       name: {
         label: 'Name'
       },
@@ -119,12 +181,23 @@ const MODULES = [
       },
       createdOn: {
         label: 'Created On',
-        formatOnCreate: "(value) => value || Date.now()",
-        hint: 'Set to todays date if left empty',
+        formatOnLoad: '(value) => value || Date.now()',
         component: {
           type: 'date',
           configuration: {
             format: 'number'
+          }
+        }
+      },
+      role: {
+        label: 'Role',
+        component: {
+          type: 'select',
+          configuration: {
+            populate: {
+              collection: 'roles',
+              orderBy: 'name'
+            }
           }
         }
       }
@@ -190,8 +263,7 @@ const MODULES = [
     definitions: {
       createdOn: {
         label: 'Created On',
-        formatOnCreate: "(value) => value || Date.now()",
-        hint: 'Set to todays date if left empty',
+        formatOnLoad: '(value) => value || Date.now()',
         component: {
           type: 'date',
           configuration: {
@@ -220,7 +292,7 @@ const serviceAccount = require('./serviceAccountKey.json');
  */
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://mg-photography-98d6d.firebaseio.com'
+  databaseURL: 'https://jaspero-jms.firebaseio.com'
 });
 
 async function exec() {

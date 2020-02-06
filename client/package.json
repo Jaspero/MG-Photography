@@ -35,12 +35,12 @@
     "lodash-es": "4.17.14",
     "nanoid": "2.1.1",
     "rxjs": "6.5.3",
-    "tinymce": "5.0.16",
+    "tinymce": "5.1.4",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.9",
+    "@angular-devkit/build-angular": "^0.803.21",
     "@angular/cli": "8.3.9",
     "@angular/compiler-cli": "8.2.10",
     "@angular/language-service": "8.2.10",

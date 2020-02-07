@@ -10,7 +10,6 @@
         src: '',
         index: 0
     };
-
     function viewPhoto(i) {
 
       if (i < 0) {
@@ -45,6 +44,7 @@
             viewPhoto(photoViewer.index + 1);
         }
     }
+
 </script>
 
 <style>
@@ -202,6 +202,23 @@
 
     img {
         pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        .viewer .photo {
+            width: 90%;
+            height: 0;
+        }
+        .viewer .photo img {
+            width: 100%;
+            height: auto;
+
+            transform: translateY(-50%);
+        }
+
+        .close {
+            display: none;
+        }
     }
 
     /* Close button */

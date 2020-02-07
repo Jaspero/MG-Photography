@@ -51,7 +51,7 @@
     .gallery {
         display: flex;
         flex-wrap: wrap;
-        max-width: 60rem;
+        max-width: 95rem;
         margin: 60px auto;
     }
     .gallery-col {

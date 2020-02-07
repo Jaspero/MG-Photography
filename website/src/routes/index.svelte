@@ -89,7 +89,7 @@
     justify-content: center;
     border-radius: 50%;
     transition: .2s;
-    background: rgba(255,255,255,.1);
+    background: rgba(255,255,255,.5);
   }
   .slideshow-text-cta:hover {
     color: black;

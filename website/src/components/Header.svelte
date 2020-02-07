@@ -48,7 +48,7 @@
       z-index: 10;
       right: 0;
       top: 0;
-      background: #6E6E6E;
+      background: rgba(70,70,70);
       height: 100%;
       transition: .2s;
       visibility: hidden;
@@ -82,7 +82,7 @@
 
 <header class="header {segment}">
   <a class="header-link" href="/">Mislav Gelenčir</a>
-  <nav class="header-nav">
+  <nav class="header-nav active">
     {#each $categories.reverse() as category}
       <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}

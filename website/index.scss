@@ -38,6 +38,8 @@ body {
   font-family: 'Particle', sans-serif;
   font-size: 18px;
 
+  scroll-behaviour: smooth;
+
   @media (max-width: 900px) {
     font-size: 14px;
   }

@@ -1,5 +1,5 @@
 <script>
-    import { fade } from 'svelte/transition';
+    import {fade} from 'svelte/transition';
 
     export let title = '';
     export let images = '';
@@ -10,25 +10,28 @@
         src: '',
         index: 0
     };
+
+    let scrollerVisible = false;
+
     function viewPhoto(i) {
 
-      if (i < 0) {
-        i = images.length - 1;
-      }
+        if (i < 0) {
+            i = images.length - 1;
+        }
 
-      if (i === images.length) {
-        i = 0;
-      }
+        if (i === images.length) {
+            i = 0;
+        }
 
-      photoViewer.src = images[i];
-      photoViewer.active = true;
-      photoViewer.index = i;
+        photoViewer.src = images[i];
+        photoViewer.active = true;
+        photoViewer.index = i;
     }
 
     function closePhotoViewer() {
-      photoViewer.src = '';
-      photoViewer.active = false;
-      photoViewer.index = 0;
+        photoViewer.src = '';
+        photoViewer.active = false;
+        photoViewer.index = 0;
     }
 
     document.onkeydown = checkArrows;
@@ -45,6 +48,18 @@
         }
     }
 
+    function scrollUp() {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    window.onscroll = function(ev) {
+        scrollerVisible = window.pageYOffset > 900;
+    };
+
 </script>
 
 <style>
@@ -54,25 +69,31 @@
         max-width: 95rem;
         margin: 60px auto;
     }
+
     .gallery-col {
         width: 50%;
         position: relative;
         padding-bottom: 66%;
     }
+
     .gallery-col.landscape {
         width: 100%;
         padding-bottom: 66%;
         transform: translateY(0);
     }
-    .gallery-col.landscape:nth-child(1){
+
+    .gallery-col.landscape:nth-child(1) {
         padding-bottom: 33%;
     }
+
     .gallery-col.landscape:nth-child(2n - 1):not(:nth-child(1)) {
         transform: translateY(0);
     }
+
     .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
         transform: translateY(-50%);
     }
+
     .gallery-col-title {
         position: absolute;
         height: 100%;
@@ -87,6 +108,7 @@
         color: #6E6E6E;
         line-height: 80%;
     }
+
     .gallery-col-title::after {
         content: '';
         position: absolute;
@@ -98,6 +120,7 @@
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
     }
+
     .gallery-col-image {
         position: absolute;
         top: 20px;
@@ -106,15 +129,18 @@
         height: calc(100% - 40px);
         object-fit: cover;
     }
+
     @media (max-width: 1600px) {
         .gallery-col-title {
             font-size: 10vw;
         }
     }
+
     @media (max-width: 1100px) {
         .gallery-col-title {
             font-size: 7vw;
         }
+
         .gallery-col-title {
             font-size: 4em;
             align-items: flex-start;
@@ -125,6 +151,7 @@
             color: #6E6E6E;
             line-height: 80%;
         }
+
         .gallery-col-title::after {
             z-index: -1;
             top: 50px;
@@ -133,22 +160,27 @@
             width: 200px;
         }
     }
+
     @media (max-width: 600px) {
         .gallery-col {
             width: 100%;
             padding-bottom: 133%;
         }
+
         .gallery-col:nth-child(1),
         .gallery-col:nth-child(1).landscape {
             padding-bottom: 60px;
             padding-top: 60px;
         }
+
         .gallery-col.landscape {
             padding-bottom: 66%;
         }
+
         .gallery-col:nth-child(2n - 1):not(:nth-child(1)) {
             transform: translateY(0);
         }
+
         .gallery-col-title {
             position: static;
             font-size: 5em;
@@ -161,6 +193,7 @@
             color: #6E6E6E;
             line-height: 80%;
         }
+
         .gallery-col-title::after {
             z-index: -1;
             top: 25px;
@@ -209,6 +242,7 @@
             width: 90%;
             height: 0;
         }
+
         .viewer .photo img {
             width: 100%;
             height: auto;
@@ -230,11 +264,13 @@
         height: 32px;
         opacity: 0.3;
     }
+
     .close:hover {
         opacity: 1;
 
         cursor: pointer;
     }
+
     .close:before, .close:after {
         position: absolute;
         left: 15px;
@@ -243,9 +279,11 @@
         width: 2px;
         background-color: #333;
     }
+
     .close:before {
         transform: rotate(45deg);
     }
+
     .close:after {
         transform: rotate(-45deg);
     }
@@ -259,7 +297,7 @@
 
         background-color: white;
         width: 50px;
-        line-height:50px;
+        line-height: 50px;
         text-align: center;
         border-radius: 100%;
         transition: .15s;
@@ -283,6 +321,27 @@
         -webkit-user-select: none;
         user-select: none;
     }
+
+    .scrollUp {
+        position: fixed;
+
+        width: 50px;
+        height: 50px;
+        padding: 8px;
+
+        bottom: 50px;
+        right: 50px;
+
+        background: white;
+        border: none;
+        text-decoration: none;
+
+        cursor: pointer;
+
+        z-index: 8;
+
+        border-radius: 100px;
+    }
 </style>
 
 <section class="gallery">
@@ -294,9 +353,15 @@
             <img class="gallery-col-image" src={image} alt="" ondrag="return false"
                  ondragstart="return false"
                  galleryimg="no"
-                 onmousedown="return false" />
+                 onmousedown="return false"/>
         </a>
     {/each}
+
+    {#if scrollerVisible}
+        <button class="scrollUp" on:click={scrollUp} transition:fade={{duration: 200}}>
+            <img src="/icons/up.svg" alt="Scroll Up Icon" />
+        </button>
+    {/if}
 </section>
 
 {#if photoViewer.active}
@@ -306,7 +371,7 @@
             <img src={photoViewer.src} alt="Active photo" ondrag="return false"
                  ondragstart="return false"
                  galleryimg="no"
-                 onmousedown="return false" />
+                 onmousedown="return false"/>
             <span class="close" on:click={closePhotoViewer}></span>
             <span class="arrow left-arrow" on:click={() => viewPhoto(photoViewer.index - 1)}>&lt;</span>
             <span class="arrow right-arrow" on:click={() => viewPhoto(photoViewer.index + 1)}>&gt;</span>

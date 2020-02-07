@@ -3,9 +3,7 @@
 
   import { categories } from '../stores';
 
-  function openMenu() {
-    document.getElementsByClassName("header-nav")[0].classList.add("active")
-  }
+  let expanded = false;
 </script>
 
 <style>
@@ -48,11 +46,15 @@
       z-index: 10;
       right: 0;
       top: 0;
-      background: #6E6E6E;
+      background: rgba(0,0,0,.9);
       height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
       transition: .2s;
       visibility: hidden;
-      transform: translate(100%, 50%);
+      transform: translateX(100%);
       opacity: 0;
     }
     .header-nav a{
@@ -61,6 +63,7 @@
       text-decoration: none;
       font-size: 17px;
       display: block;
+      text-align: center;
     }
     .header-nav a:hover {
       background-color: #ddd;
@@ -73,6 +76,11 @@
     }
     .header-menu {
       display: block;
+      position: relative;
+      z-index: 11;
+    }
+    .header-menu.active {
+      color: white;
     }
     .header-link {
       display: block;
@@ -82,12 +90,12 @@
 
 <header class="header {segment}">
   <a class="header-link" href="/">Mislav Gelenčir</a>
-  <nav class="header-nav">
+  <nav class="header-nav" id="header-nav" class:active={expanded}>
     {#each $categories.reverse() as category}
-      <a class="header-link" href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
+      <a class="header-link" on:click={() => expanded = !expanded} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
   </nav>
-  <button class="header-menu" onclick="openMenu()">
+  <button class="header-menu" on:click={() => expanded = !expanded} class:active={expanded}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-linecap="round" width="20">
       <line x1="1" y1="1" x2="11" y2="1"/>
       <line x1="1" y1="4" x2="11" y2="4"/>

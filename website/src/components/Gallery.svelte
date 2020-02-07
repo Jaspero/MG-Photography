@@ -10,7 +10,6 @@
         src: '',
         index: 0
     };
-
     function viewPhoto(i) {
 
       if (i < 0) {
@@ -45,13 +44,14 @@
             viewPhoto(photoViewer.index + 1);
         }
     }
+
 </script>
 
 <style>
     .gallery {
         display: flex;
         flex-wrap: wrap;
-        max-width: var(--container);
+        max-width: 95rem;
         margin: 60px auto;
     }
     .gallery-col {
@@ -79,9 +79,9 @@
         width: 100%;
         display: flex;
         align-items: flex-start;
-        font-size: 8.5em;
+        font-size: 5.5em;
         padding-left: 0.25em;
-        padding-top: 120px;
+        padding-top: 112px;
         font-family: 'Simplo';
         text-transform: uppercase;
         color: #6E6E6E;
@@ -93,8 +93,8 @@
         z-index: -1;
         top: 15px;
         left: 0px;
-        height: 350px;
-        width: 350px;
+        height: 250px;
+        width: 250px;
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
     }
@@ -202,6 +202,23 @@
 
     img {
         pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        .viewer .photo {
+            width: 90%;
+            height: 0;
+        }
+        .viewer .photo img {
+            width: 100%;
+            height: auto;
+
+            transform: translateY(-50%);
+        }
+
+        .close {
+            display: none;
+        }
     }
 
     /* Close button */

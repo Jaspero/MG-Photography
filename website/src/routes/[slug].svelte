@@ -35,5 +35,5 @@
 </script>
 
 {#if site}
-  <Gallery title="{site.name}" images="{site.gallery}" orientation="{site.type}"/>
+  <Gallery title="{site.name}" images="{site.gallery}" />
 {/if}

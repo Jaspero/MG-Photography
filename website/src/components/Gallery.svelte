@@ -1,9 +1,13 @@
 <script>
     import {fade} from 'svelte/transition';
+    import {afterUpdate} from 'svelte';
 
     export let title = '';
-    export let images = '';
-    export let orientation = 'portrait';
+    export let images = [];
+
+    let orderedImages = [];
+    let orderedIndexes = [];
+    let columns = 2;
 
     let photoViewer = {
         active: false,
@@ -13,25 +17,26 @@
 
     let scrollerVisible = false;
 
-    function viewPhoto(i) {
-
-        if (i < 0) {
-            i = images.length - 1;
-        }
-
-        if (i === images.length) {
-            i = 0;
-        }
-
-        photoViewer.src = images[i];
+    function viewPhoto(src) {
+        photoViewer.src = src;
         photoViewer.active = true;
-        photoViewer.index = i;
+    }
+
+    function viewNext() {
+        let nextIndex = images.indexOf(photoViewer.src) + 1;
+        if (nextIndex === images.length) nextIndex = 0;
+        viewPhoto(images[nextIndex]);
+    }
+
+    function viewPrev() {
+        let prevIndex = images.indexOf(photoViewer.src) - 1;
+        if (prevIndex < 0) prevIndex = images.length - 1;
+        viewPhoto(images[prevIndex]);
     }
 
     function closePhotoViewer() {
         photoViewer.src = '';
         photoViewer.active = false;
-        photoViewer.index = 0;
     }
 
     document.onkeydown = checkArrows;
@@ -42,11 +47,16 @@
         if (e.keyCode === 27) {
             closePhotoViewer();
         } else if (e.keyCode === 37) {
-            viewPhoto(photoViewer.index - 1);
+            viewPrev();
         } else if (e.keyCode === 39) {
-            viewPhoto(photoViewer.index + 1);
+            viewNext();
         }
     }
+
+    window.addEventListener('resize', () => {
+        columns = (window.innerWidth <= 900) ? 1 : 2;
+        reorder();
+    });
 
     function scrollUp() {
         window.scroll({
@@ -59,6 +69,30 @@
     window.onscroll = function(ev) {
         scrollerVisible = window.pageYOffset > 900;
     };
+
+    afterUpdate(() => {
+        reorder();
+    });
+
+    function reorder() {
+        let arr = images;
+        const cols = columns;
+        let out = [];
+        let indexes = [];
+        let col = 0;
+        while (col < cols) {
+            for (let i = 0; i < arr.length; i += cols) {
+                let _val = arr[i + col];
+                if (_val !== undefined) {
+                    out.push(_val);
+                    indexes.push(i + col);
+                }
+            }
+            col++;
+        }
+        orderedImages = out;
+        orderedIndexes = indexes;
+    }
 
 </script>
 
@@ -73,7 +107,7 @@
     .gallery-col {
         width: 50%;
         position: relative;
-        padding-bottom: 66%;
+        padding-bottom: 20%;
     }
 
     .gallery-col.landscape {
@@ -119,15 +153,6 @@
         width: 250px;
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
-    }
-
-    .gallery-col-image {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
-        object-fit: cover;
     }
 
     @media (max-width: 1600px) {
@@ -255,7 +280,6 @@
         }
     }
 
-    /* Close button */
     .close {
         position: absolute;
         right: 32px;
@@ -333,36 +357,64 @@
         right: 50px;
 
         background: white;
-        border: none;
         text-decoration: none;
 
         cursor: pointer;
 
-        z-index: 8;
+        z-index: 3;
 
         border-radius: 100px;
+        border: 3px solid black;
+    }
+
+    .item-image {
+        width: 100%;
+        height: auto;
+    }
+
+    ul {
+        list-style: none;
+        max-width: 1000px;
+        margin: auto;
+        padding: 10px;
+        columns: 2;
+        column-gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+        ul {
+            columns: 1;
+        }
+    }
+
+    li {
+        margin-bottom: 10px;
+        break-inside: avoid;
+        cursor: pointer;
     }
 </style>
 
-<section class="gallery">
-    <div class="gallery-col" class:landscape={orientation === 'landscape'}>
-        <h1 class="gallery-col-title">{title.replace('-', ' ')}</h1>
+<div class="gallery">
+    <div class="gallery-col">
+        <h1 class="gallery-col-title unselectable">{title.replace('-', ' ')}</h1>
     </div>
-    {#each images as image, i}
-        <a class="gallery-col" on:click={() => viewPhoto(i)} class:landscape={orientation === 'landscape'}>
-            <img class="gallery-col-image" src={image} alt="" ondrag="return false"
-                 ondragstart="return false"
-                 galleryimg="no"
-                 onmousedown="return false"/>
-        </a>
-    {/each}
+    <ul>
+        {#each orderedImages as image, i}
+            <li on:click={() => viewPhoto(image)} class="unselectable">
+                <img class="item-image" src={image} alt="" ondrag="return false"
+                     ondragstart="return false"
+                     galleryimg="no"
+                     onmousedown="return false"/>
+            </li>
+        {/each}
+    </ul>
 
     {#if scrollerVisible}
         <button class="scrollUp" on:click={scrollUp} transition:fade={{duration: 200}}>
             <img src="/icons/up.svg" alt="Scroll Up Icon" />
         </button>
     {/if}
-</section>
+</div>
 
 {#if photoViewer.active}
     <div class="viewer" transition:fade={{duration: 200}}>
@@ -373,8 +425,8 @@
                  galleryimg="no"
                  onmousedown="return false"/>
             <span class="close" on:click={closePhotoViewer}></span>
-            <span class="arrow left-arrow" on:click={() => viewPhoto(photoViewer.index - 1)}>&lt;</span>
-            <span class="arrow right-arrow" on:click={() => viewPhoto(photoViewer.index + 1)}>&gt;</span>
+            <span class="arrow left-arrow" on:click={() => viewPrev()}>&lt;</span>
+            <span class="arrow right-arrow" on:click={() => viewNext()}>&gt;</span>
         </div>
     </div>
 {/if}

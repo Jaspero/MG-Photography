@@ -9,7 +9,6 @@
   .footer-banner-title {
     font-family: 'Simplo', sans-serif;
   }
-
   .footer-banner-title-2 {
     display: block;
     font-size: 3em;
@@ -32,7 +31,6 @@
     letter-spacing: .1em;
    font-family: Simplo;
   }
-
   .footer-contact {
     padding: 4em 1em;
     background: #d9d9d9;

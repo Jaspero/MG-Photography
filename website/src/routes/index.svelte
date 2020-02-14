@@ -125,7 +125,26 @@
       font-size: 1.2em;
     }
   }
-
+  @media (max-width: 600px) {
+    .slideshow-text-title {
+      font-size: .9em;
+    }
+    .slideshow-text-cta {
+      font-size: 1.3em;
+      margin: 1em 0;
+      width: 8.2em;
+      height: 8.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: .2s;
+      background: rgba(255,255,255,.5);
+    }
+    .slideshow {
+      background-position: 70% 30%;
+    }
+  }
   .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

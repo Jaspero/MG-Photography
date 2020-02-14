@@ -225,6 +225,10 @@
             padding-top: 112px;
             margin-bottom: 120px;
         }
+        .gallery {
+            max-width: 85rem;
+            margin: 50px auto;
+        }
     }
     @media (max-width: 900px) {
         .gallery-title {
@@ -233,6 +237,10 @@
             padding-left: 0.25em;
             padding-top: 112px;
             margin-bottom: 120px;
+        }
+        .gallery {
+            max-width: 85rem;
+            margin: 50px auto;
         }
     }
     @media (max-width: 600px) {

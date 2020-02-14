@@ -59,7 +59,6 @@
         font-size: 1.95em;
         z-index: 3;
     }
-
     .about-me-content {
         position: relative;
         z-index: 1; /* Gallery negative margin is overlapping this section */
@@ -94,7 +93,6 @@
         font-size: 1.3em;
         margin: auto;
     }
-
     .contact-content-title-3 {
         display: block;
         font-size: 1em;
@@ -105,7 +103,6 @@
         margin: auto;
         margin-top: 2em;
     }
-
     .contact-content-paragraph {
         max-width: 23em;
         letter-spacing: .1em;
@@ -136,7 +133,6 @@
             margin-left: 1.70em;
         }
     }
-
     @media (max-width: 600px) {
         .contact-hero-title-1 {
             font-size: 3.25em;

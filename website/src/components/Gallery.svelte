@@ -217,6 +217,19 @@
         transform: scale(1.1);
     }
 
+    @media (max-width: 1600px) {
+        .gallery-title {
+            position: relative;
+            font-size: 6em;
+            padding-left: 0.25em;
+            padding-top: 112px;
+            margin-bottom: 120px;
+        }
+        .gallery {
+            max-width: 70rem;
+            margin: 50px auto;
+        }
+    }
     @media (max-width: 1200px) {
         .gallery-title {
             position: relative;
@@ -226,7 +239,7 @@
             margin-bottom: 120px;
         }
         .gallery {
-            max-width: 85rem;
+            max-width: 65rem;
             margin: 50px auto;
         }
     }
@@ -239,9 +252,10 @@
             margin-bottom: 120px;
         }
         .gallery {
-            max-width: 85rem;
+            max-width: 50rem;
             margin: 50px auto;
         }
+
     }
     @media (max-width: 600px) {
         .gallery-list {

@@ -23,6 +23,23 @@
   --container: 90em;
 }
 
+@media (max-width: 1600px) {
+  :root {
+    --container: 70em;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --container: 50em;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --container: 25em;
+  }
+}
 
 /* Generic
  *============================================================================*/
@@ -40,9 +57,9 @@ body {
 
   scroll-behaviour: smooth;
 
+
   @media (max-width: 900px) {
     font-size: 14px;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {

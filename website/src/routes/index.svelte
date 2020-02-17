@@ -119,13 +119,17 @@
   @media (max-width: 1700px) {
     .slideshow-text-title {
       font-size: 1.1em;
+      margin-top: 10%;
       display: flex;
       flex-direction: column;
       line-height: 0.8;
       max-width: var(--container)
     }
     .slideshow-text-cta{
-      max-width: var(--container)
+      font-size: 1em;
+      margin: 1em 0;
+      width: 10em;
+      height: 10em;
     }
     .slideshow-text {
       flex-direction: column;

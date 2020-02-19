@@ -200,7 +200,7 @@
         top: calc(50% - 25px);
         cursor: pointer;
         background-color: white;
-        opacity: 0.6;
+        opacity: 0.4;
         width: 50px;
         line-height: 50px;
         text-align: center;

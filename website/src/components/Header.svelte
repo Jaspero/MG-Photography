@@ -1,9 +1,13 @@
 <script>
   export let segment;
-
+import {afterUpdate} from "svelte";
   import { categories } from '../stores';
 
   let expanded = false;
+  let page = '';
+  afterUpdate(() => {
+    page = window.location.pathname.slice(1);
+  })
 </script>
 
 <style>
@@ -30,6 +34,9 @@
     text-transform: uppercase;
     display: inline-block;
     padding: 1em;
+  }
+  .header-link.active {
+    color:  #00b1d2;
   }
   .header-menu {
     display: none;
@@ -92,7 +99,7 @@
   <a class="header-link" href="/">Mislav Gelenčir</a>
   <nav class="header-nav" id="header-nav" class:active={expanded}>
     {#each $categories.reverse() as category}
-      <a class="header-link" on:click={() => expanded = !expanded} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
+      <a class="header-link" class:active={category.name == page} on:click={() => expanded = !expanded} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
   </nav>
   <button class="header-menu" on:click={() => expanded = !expanded} class:active={expanded}>

@@ -59,6 +59,10 @@
         font-size: 1.95em;
         z-index: 3;
     }
+
+    .about-me-background{
+        background: #e8e8e8;
+    }
     .about-me-content {
         position: relative;
         z-index: 1; /* Gallery negative margin is overlapping this section */
@@ -67,6 +71,8 @@
         font-family: 'Simplo', sans-serif;
         display: flex;
         flex-wrap: wrap;
+        max-width: 70em;
+        margin: 0 auto;
     }
     .contact-content {
         position: relative;
@@ -190,17 +196,19 @@
     </div>
 </section>
 
-<div class="about-me-content">
-    <span class="contact-content-title-1">MEET ME</span>
-    <section class="contact-content">
-        <div class="contact-content-title">
+<div class="about-me-background">
+    <div class="about-me-content">
+        <span class="contact-content-title-1">MEET ME</span>
+        <section class="contact-content">
+            <div class="contact-content-title">
             <a href="contact" class="contact-content-title-2">ABOUT ME</a>
             <span class="contact-content-title-3">“When work, commitment and pleasure all become one and you reach that deep well where passion lives, nothing is impossible.”</span>
             <p class="contact-content-paragraph">I’m Mislav Gelencir, a passionate professional portrait, event and property photographer. Worked for many years in a different field until I finally understood that only photography would satisfy me as a life-long career. Photography is a lifestyle choice for me and I’ve allowed its creative drive and adventurous spirit to work with me. My goal as a photographer is to look past the face we present to capture something deeper. Sometimes this results in creating a bright, eye-catching image, and sometimes a more poetic study of the face. Nothing motivates me more than the special bond I create with my valued clients.</p>
+         </div>
+        </section>
+        <div class="contact-content-picture">
+            <img class="contact-image" src="/contact-page-pic-1.png" alt="MG">
         </div>
-    </section>
-    <div class="contact-content-picture">
-        <img class="contact-image" src="/contact-page-pic-1.png" alt="MG">
     </div>
 </div>
 

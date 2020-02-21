@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {MatDialog} from '@angular/material';
-import {forkJoin, from, of} from 'rxjs';
+import {concat, forkJoin, from, Observable, of} from 'rxjs';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {ENV_CONFIG} from '../../../../../../env-config';
 import {StateService} from '../../../../../shared/services/state/state.service';
@@ -33,6 +33,7 @@ import {formatGeneratedImages} from '../../../utils/format-generated-images';
 import {switchItemLocations} from '../../../utils/switch-item-locations';
 import {FieldComponent} from '../../field/field.component';
 import {readFile} from './read-file';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 interface GalleryData extends FieldData {
   allowUrl?: boolean;
@@ -59,7 +60,8 @@ export class GalleryComponent extends FieldComponent<GalleryData>
     private http: HttpClient,
     private storage: AngularFireStorage,
     private state: StateService,
-    private viewportRuler: ViewportRuler
+    private viewportRuler: ViewportRuler,
+    private fb: FormBuilder
   ) {
     super(cData);
   }
@@ -275,7 +277,7 @@ export class GalleryComponent extends FieldComponent<GalleryData>
 
     this.placeholder.enter(drag, drag.element.nativeElement.offsetLeft, drag.element.nativeElement.offsetTop);
     return false;
-  }
+  };
 
   /** Determines the point of the page that was touched by the user. */
   getPointerPositionOnPage(event: MouseEvent | TouchEvent) {
@@ -329,13 +331,22 @@ export class GalleryComponent extends FieldComponent<GalleryData>
                   moduleId,
                   documentId,
                   ...this.cData.generatedImages &&
-                    formatGeneratedImages(this.cData.generatedImages)
+                  formatGeneratedImages(this.cData.generatedImages)
                 }
               })
             ).pipe(
-              switchMap(task => task.ref.getDownloadURL()),
-              tap(url => {
-                cur.data = url;
+              switchMap((task) => task.ref.getDownloadURL()),
+              switchMap((url: string) => {
+                return getMeta(cur.data)
+                  .pipe(
+                    tap((size: object) => {
+                      console.log(this.cData.form.get('resolutions'));
+                      cur.data = url;
+                      (this.cData.form.get('resolutions') as FormArray).push(
+                        this.fb.group({url, ...size})
+                      );
+                    })
+                  );
               })
             )
           );
@@ -367,4 +378,15 @@ function __isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
 function __isInsideDropListClientRect(dropList: CdkDropList, x: number, y: number) {
   const {top, bottom, left, right} = dropList.element.nativeElement.getBoundingClientRect();
   return y >= top && y <= bottom && x >= left && x <= right;
+}
+
+function getMeta(url) {
+  return new Observable((obs) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => {
+      obs.next({width: img.width, height: img.height});
+      obs.complete();
+    };
+  });
 }

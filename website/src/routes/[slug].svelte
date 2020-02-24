@@ -19,7 +19,6 @@
       return category.find(it => it.name.toLowerCase() === page.params.slug);
     }
   ).subscribe(siteData => {
-    console.log(siteData);
     if (siteData) {
       if (typeof siteData === 'string') goto(siteData);
       else site = siteData;
@@ -35,5 +34,5 @@
 </script>
 
 {#if site}
-  <Gallery title="{site.name}" images="{site.gallery}" />
+  <Gallery title="{site.name}" images="{site.gallery}" resolutions="{site.resolutions}" />
 {/if}

@@ -1,7 +1,7 @@
 <script>
     import { goto } from '@sapper/app';
     import { firestore } from '../firebase';
-    import { categories } from '../stores';
+    import { categories, refresh } from '../stores';
     import Header from '../components/Header.svelte';
     import Footer from '../components/Footer.svelte'
 
@@ -21,6 +21,9 @@
                     goto('unavailable');
                 });
     }
+
+
+    refresh.set(true);
 </script>
 
 <style>

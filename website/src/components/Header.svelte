@@ -1,13 +1,20 @@
 <script>
   export let segment;
 import {afterUpdate} from "svelte";
-  import { categories } from '../stores';
+  import { categories, refresh } from '../stores';
 
   let expanded = false;
   let page = '';
   afterUpdate(() => {
-    page = window.location.pathname.slice(1);
-  })
+    page = window.location.pathname.slice(1).toLowerCase().replace('%20', '-');
+  });
+
+  function go(name) {
+    expanded = !expanded;
+    refresh.set(name);
+  }
+
+
 </script>
 
 <style>
@@ -98,8 +105,8 @@ import {afterUpdate} from "svelte";
 <header class="header {segment}">
   <a class="header-link" href="/">Mislav Gelenčir</a>
   <nav class="header-nav" id="header-nav" class:active={expanded}>
-    {#each $categories.reverse() as category}
-      <a class="header-link" class:active={category.name == page} on:click={() => expanded = !expanded} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
+    {#each $categories as category}
+      <a class="header-link" class:active={category.name.toLowerCase().replace(' ', '-') == page} on:click={() => go(category.name)} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
   </nav>
   <button class="header-menu" on:click={() => expanded = !expanded} class:active={expanded}>

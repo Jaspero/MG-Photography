@@ -1,19 +1,26 @@
 <script>
     import {fade} from 'svelte/transition';
     import {afterUpdate} from 'svelte';
+    import {refresh} from '../stores';
+    import Image from './Image.svelte';
 
     export let title = '';
     export let images = [];
+    export let resolutions = [];
 
-    let orderedImages = [];
-    let orderedIndexes = [];
-    let columns = 2;
+    const hasAPI = 'IntersectionObserver' in window;
 
+    let parsedResolutions = {};
     let photoViewer = {
         active: false,
         src: '',
         index: 0
     };
+
+    let leftColumnHeight = 0;
+    let rightColumnHeight = 0;
+    let leftColumnImages = [];
+    let rightColumnImages = [];
 
     let scrollerVisible = false;
 
@@ -53,9 +60,10 @@
         }
     }
 
-    window.addEventListener('resize', () => {
-        columns = (window.innerWidth <= 900) ? 1 : 2;
-        reorder();
+    afterUpdate(() => {
+      refresh.subscribe(data => {
+            parseResolutions();
+          });
     });
 
     function scrollUp() {
@@ -70,28 +78,31 @@
         scrollerVisible = window.pageYOffset > 900;
     };
 
-    afterUpdate(() => {
+    function parseResolutions() {
+      parsedResolutions = {};
+        resolutions.map(resolution => {
+          parsedResolutions[resolution.url] = {width: resolution.width, height: resolution.height};
+        });
+
         reorder();
-    });
+    }
 
     function reorder() {
-        let arr = images;
-        const cols = columns;
-        let out = [];
-        let indexes = [];
-        let col = 0;
-        while (col < cols) {
-            for (let i = 0; i < arr.length; i += cols) {
-                let _val = arr[i + col];
-                if (_val !== undefined) {
-                    out.push(_val);
-                    indexes.push(i + col);
-                }
-            }
-            col++;
-        }
-        orderedImages = out;
-        orderedIndexes = indexes;
+      leftColumnImages = [];
+      leftColumnHeight = 0;
+      rightColumnImages = [];
+      rightColumnHeight = 0;
+        images.map((image, i) => {
+          if (i == images.length - 1) {
+            rightColumnImages.push(image);
+          } else if (leftColumnHeight <= rightColumnHeight) {
+            leftColumnImages.push(image);
+            leftColumnHeight += parsedResolutions[image].height;
+          } else {
+            rightColumnImages.push(image);
+            rightColumnHeight += parsedResolutions[image].height;
+          }
+        });
     }
 
 </script>
@@ -123,23 +134,6 @@
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
     }
-    .gallery-list {
-        list-style: none;
-        padding: 10px;
-        columns: 2;
-        column-gap: 10px;
-    }
-    .gallery-list-item {
-        margin-bottom: 10px;
-        break-inside: avoid;
-        cursor: pointer;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    .gallery-list-image {
-        width: 100%;
-        height: auto;
-    }
     .scroll-up {
         position: fixed;
         z-index: 3;
@@ -169,9 +163,9 @@
         z-index: 5;
         height: 90%;
         width: auto;
-        left: calc(50% + 1px);
-        top: calc(50% + 1px);
-        border: 1px solid black;
+        left: 50%;
+        top: 50%;
+        border: 2px solid black;
         background-color: white;
         transform: translate(-50%, -50%);
     }
@@ -218,6 +212,24 @@
         transform: scale(1.1);
     }
 
+
+    .gallery-images {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .gallery-column {
+        width: calc(50% - 5px);
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: auto;
+        min-height: 150px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
     @media (max-width: 1600px) {
         .gallery-title {
             position: relative;
@@ -259,8 +271,9 @@
 
     }
     @media (max-width: 600px) {
-        .gallery-list {
-            columns: 1;
+        .gallery-images {
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .gallery-title {
             position: relative;
@@ -281,25 +294,37 @@
         .viewer-close {
             display: none;
         }
+
+        .gallery-column {
+            width: 90%;
+        }
     }
+
 </style>
 
 <div class="gallery">
-    <h1 class="gallery-title unselectable">{title.replace('-', ' ')}</h1>
-    <ul class="gallery-list">
-        {#each orderedImages as image, i}
-            <li on:click={() => viewPhoto(image)} class="gallery-list-item">
-                <img class="gallery-list-image" src={image} alt="" ondrag="return false"
-                     ondragstart="return false"
-                     galleryimg="no"
-                     onmousedown="return false"/>
-            </li>
-        {/each}
-    </ul>
+    <h1 class="gallery-title">{title.replace('-', ' ')}</h1>
+    <div class="gallery-images">
+        <div class="gallery-column" id="column-left">
+            {#each leftColumnImages as image, i}
+                <div class="gallery-image" on:click={() => viewPhoto(image)}>
+                    <Image item={image} lazy={hasAPI} />
+                </div>
+            {/each}
+        </div>
+        <div class="gallery-column" id="column-right">
+            {#each rightColumnImages as image, i}
+                <div class="gallery-image" on:click={() => viewPhoto(image)}>
+                    <Image item={image} lazy={hasAPI} />
+                </div>
+            {/each}
+        </div>
+    </div>
 </div>
 
+
 {#if scrollerVisible}
-    <button class="scroll-up" on:click={scrollUp} transition:fade={{duration: 200}} aria-label="Scroll to top." title="Scroll to top.">
+    <button class="scroll-up" on:click={scrollUp} transition:fade="{{duration: 200}}" aria-label="Scroll to top." title="Scroll to top.">
         <img src="/icons/arrow-up.svg" alt=""/>
     </button>
 {/if}

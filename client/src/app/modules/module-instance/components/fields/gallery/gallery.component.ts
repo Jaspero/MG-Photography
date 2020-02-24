@@ -277,7 +277,7 @@ export class GalleryComponent extends FieldComponent<GalleryData>
 
     this.placeholder.enter(drag, drag.element.nativeElement.offsetLeft, drag.element.nativeElement.offsetTop);
     return false;
-  };
+  }
 
   /** Determines the point of the page that was touched by the user. */
   getPointerPositionOnPage(event: MouseEvent | TouchEvent) {

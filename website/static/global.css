@@ -23,6 +23,7 @@ body {
   margin: 0;
   line-height: 1.5;
   color: #333;
+  /*background-color: black;*/
   font-family: 'Particle', sans-serif;
   font-size: 18px; }
   @media (max-width: 900px) {
@@ -41,4 +42,13 @@ a {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

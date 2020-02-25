@@ -1,7 +1,7 @@
 <script>
   export let segment;
 import {afterUpdate} from "svelte";
-  import { categories, refresh } from '../stores';
+  import { categories, refresh, loading } from '../stores';
 
   let expanded = false;
   let page = '';
@@ -13,6 +13,7 @@ import {afterUpdate} from "svelte";
     expanded = !expanded;
     document.body.classList.remove('overflow-hidden');
     refresh.set(name);
+    loading.set(true);
   }
 
   function toggleMenu() {

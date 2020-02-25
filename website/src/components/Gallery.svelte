@@ -1,7 +1,7 @@
 <script>
     import {fade} from 'svelte/transition';
-    import {afterUpdate} from 'svelte';
-    import {refresh} from '../stores';
+    import {afterUpdate, onMount} from 'svelte';
+    import {refresh, loading} from '../stores';
     import Image from './Image.svelte';
 
     export let title = '';
@@ -46,10 +46,6 @@
     function closePhotoViewer() {
         photoViewer.src = '';
         photoViewer.active = false;
-
-
-
-
         document.body.classList.remove('overflow-hidden');
     }
 
@@ -69,8 +65,16 @@
 
     afterUpdate(() => {
       refresh.subscribe(data => {
-            parseResolutions();
-          });
+        parseResolutions();
+      });
+    });
+
+    onMount(() => {
+      refresh.subscribe(data => {
+              setTimeout(() => {
+                  loading.set(false);
+              }, 1000);
+            });
     });
 
     function scrollUp() {
@@ -99,10 +103,7 @@
       leftColumnHeight = 0;
       rightColumnImages = [];
       rightColumnHeight = 0;
-        images.map((image, i) => {
-          // if (i == images.length - 1) {
-          //   rightColumnImages.push(image);
-          // } else
+        images.map((image) => {
             if (leftColumnHeight <= rightColumnHeight) {
             leftColumnImages.push(image);
             leftColumnHeight += parsedResolutions[image].height;
@@ -150,11 +151,15 @@
         width: 50px;
         height: 50px;
         padding: 8px;
-        background: white;
+        background: #E5E5E5;
         text-decoration: none;
         cursor: pointer;
         border-radius: 100px;
-        border: 1px solid black;
+        border: 0;
+        outline:none;
+    }
+    .scroll-up-image {
+        width: 100%;
     }
     .viewer-overlay {
         position: fixed;
@@ -219,17 +224,15 @@
     .viewer-arrow:hover {
         transform: scale(1.1);
     }
-
-
     .gallery-images {
         display: flex;
         justify-content: space-between;
+        opacity: 0;
+        transition: 1.5s;
     }
-
     .gallery-column {
         width: calc(50% - 5px);
     }
-
     .gallery-image {
         width: 100%;
         height: auto;
@@ -237,7 +240,9 @@
         margin-bottom: 5px;
         cursor: pointer;
     }
-
+    .visible {
+        opacity: 1;
+    }
     @media (max-width: 1600px) {
         .gallery-title {
             position: relative;
@@ -276,14 +281,12 @@
             max-width: 50rem;
             margin: 50px auto;
         }
-
     }
     @media (max-width: 600px) {
         .gallery-images {
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .gallery-title {
             position: relative;
             font-size: 5.5em;
@@ -303,17 +306,15 @@
         .viewer-close {
             display: none;
         }
-
         .gallery-column {
             width: 90%;
         }
     }
-
 </style>
 
 <div class="gallery">
     <h1 class="gallery-title">{title.replace('-', ' ')}</h1>
-    <div class="gallery-images">
+    <div class="gallery-images" class:visible={!$loading}>
         <div class="gallery-column" id="column-left">
             {#each leftColumnImages as image, i}
                 <div class="gallery-image" on:click={() => viewPhoto(image)}>
@@ -334,7 +335,7 @@
 
 {#if scrollerVisible}
     <button class="scroll-up" on:click={scrollUp} transition:fade="{{duration: 200}}" aria-label="Scroll to top." title="Scroll to top.">
-        <img src="/icons/arrow-up.svg" alt=""/>
+        <img class="scroll-up-image" src="/icons/single-arrow-up.svg" alt=""/>
     </button>
 {/if}
 
@@ -347,8 +348,8 @@
                  galleryimg="no"
                  onmousedown="return false"/>
             <span class="viewer-close" on:click={closePhotoViewer}></span>
-            <span class="viewer-arrow viewer-arrow-left" on:click={() => viewPrev()}>&lt;</span>
-            <span class="viewer-arrow viewer-arrow-right" on:click={() => viewNext()}>&gt;</span>
+            <span class="viewer-arrow viewer-arrow-left unselectable" on:click={viewPrev}>&lt;</span>
+            <span class="viewer-arrow viewer-arrow-right unselectable" on:click={viewNext}>&gt;</span>
         </div>
     </div>
 {/if}

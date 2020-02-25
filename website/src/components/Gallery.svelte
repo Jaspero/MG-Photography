@@ -71,9 +71,14 @@
 
     onMount(() => {
       refresh.subscribe(data => {
-              setTimeout(() => {
-                  loading.set(false);
-              }, 1000);
+
+                document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.2s';
+                document.getElementsByClassName('gallery-images')[0].style.opacity = 0;
+
+                setTimeout(() => {
+                    document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.5s';
+                    document.getElementsByClassName('gallery-images')[0].style.opacity = 1;
+                }, 1000);
             });
     });
 

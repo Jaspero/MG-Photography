@@ -1,9 +1,10 @@
 <script>
   import {goto} from '@sapper/app';
-  import {onMount, onDestroy} from 'svelte';
+  import {onMount, onDestroy, afterUpdate} from 'svelte';
   import {firestore} from '../firebase';
 
   let photos = [];
+  let offsets = [];
 
   let slidesTimeout;
 
@@ -15,12 +16,28 @@
     fetchHomePhotos()
       .then(data => {
         photos = data.data()['Home Photos'];
+        console.log(photos);
+        offsets = data.data()['offsets'];
+
         setTimeout(() => showSlides(-1), 200);
       })
       .catch(err => {
         console.log('Landing photos could not be fetched!', err);
         goto('unavailable');
       });
+  });
+
+  afterUpdate(() => {
+     const landingPhotos = document.getElementsByClassName('slideshow-image-inner');
+
+     if (window)
+         offsets.map(offset => {
+            for (let i = 0; i < landingPhotos.length; i++) {
+                if (landingPhotos[i].src == offset.url) {
+                  landingPhotos[i].style.objectPosition = offset.offset + "% center";
+                }
+            }
+         });
   });
 
   function showSlides(slideIndex) {
@@ -30,13 +47,11 @@
 
     for (let i = 0; i < slides.length; i++) {
       slides[i].style.opacity = 0;
-      // slides[i].firstChild.style.opacity = 0;
     }
 
     slideIndex = (slideIndex + 1) % slides.length;
 
     slides[slideIndex].style.opacity = 1;
-    // slides[slideIndex].firstChild.style.opacity = 1;
 
     slidesTimeout = setTimeout(() => showSlides(slideIndex), 7000);
   }
@@ -116,7 +131,7 @@
     object-fit: cover;
 
     opacity: 0;
-        transition: 1.5s;
+    transition: 1.5s;
   }
   @media (max-width: 1700px) {
     .slideshow-text-title {

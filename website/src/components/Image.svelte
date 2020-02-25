@@ -44,5 +44,7 @@
 </style>
 
 <div use:lazyLoad>
-  <img {src} alt=''/>
+  <img {src} alt='' ondrag="return false"
+       ondragstart="return false"
+       onmousedown="return false" />
 </div>

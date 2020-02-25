@@ -11,7 +11,13 @@ import {afterUpdate} from "svelte";
 
   function go(name) {
     expanded = !expanded;
+    document.body.classList.remove('overflow-hidden');
     refresh.set(name);
+  }
+
+  function toggleMenu() {
+    expanded = !expanded;
+    document.body.classList.toggle('overflow-hidden');
   }
 
 
@@ -109,7 +115,7 @@ import {afterUpdate} from "svelte";
       <a class="header-link" class:active={category.name.toLowerCase().replace(' ', '-') == page} on:click={() => go(category.name)} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
   </nav>
-  <button class="header-menu" on:click={() => expanded = !expanded} class:active={expanded}>
+  <button class="header-menu" on:click={toggleMenu} class:active={expanded}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-linecap="round" width="20">
       <line x1="1" y1="1" x2="11" y2="1"/>
       <line x1="1" y1="4" x2="11" y2="4"/>

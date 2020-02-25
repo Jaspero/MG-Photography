@@ -27,6 +27,8 @@
     function viewPhoto(src) {
         photoViewer.src = src;
         photoViewer.active = true;
+
+        document.body.classList.add('overflow-hidden');
     }
 
     function viewNext() {
@@ -44,6 +46,11 @@
     function closePhotoViewer() {
         photoViewer.src = '';
         photoViewer.active = false;
+
+
+
+
+        document.body.classList.remove('overflow-hidden');
     }
 
     document.onkeydown = checkArrows;
@@ -93,9 +100,10 @@
       rightColumnImages = [];
       rightColumnHeight = 0;
         images.map((image, i) => {
-          if (i == images.length - 1) {
-            rightColumnImages.push(image);
-          } else if (leftColumnHeight <= rightColumnHeight) {
+          // if (i == images.length - 1) {
+          //   rightColumnImages.push(image);
+          // } else
+            if (leftColumnHeight <= rightColumnHeight) {
             leftColumnImages.push(image);
             leftColumnHeight += parsedResolutions[image].height;
           } else {
@@ -275,6 +283,7 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .gallery-title {
             position: relative;
             font-size: 5.5em;

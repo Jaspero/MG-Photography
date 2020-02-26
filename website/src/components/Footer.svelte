@@ -32,26 +32,40 @@
    font-family: Simplo;
   }
   .footer-contact {
-    padding: 4em 1em;
+    height: 300px;
     background: #d9d9d9;
+    font-family: 'Simplo', sans-serif;
+  }
+  .footer-contact-container{
+    max-width: 45em;
+    display: flex;
+    margin: auto;
+    padding: 2em;
+  }
+  .footer-contact-column{
+    flex: 1;
+  }
+  .left{
     text-align: center;
   }
+  .right{
+    margin: 1em 4em;
+  }
   .footer-contact-title {
-    font-family: 'Simplo', sans-serif;
     font-size: 3em;
     color: #00b1d2;
   }
   .footer-contact-paragraph {
     max-width: 25em;
-    margin: 2em auto;
+    margin: 1em auto;
     letter-spacing: .1em;
-    font-family: Simplo;
   }
   .footer-contact-social {
-    margin: 0 1em;
-    text-decoration: none;
-    text-transform: lowercase;
-    font-family: Simplo;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-contact-social > img {
+    margin-right: 1.5em
   }
   @media (max-width: 900px) {
     .footer-banner-title-3 {
@@ -71,20 +85,25 @@
 </footer>
 
 <footer class="footer-contact">
-  <a href="contact" class="footer-contact-title">Contact me</a>
-  <p class="footer-contact-paragraph">Please get in contact to discuss how I can help you with your requirements.</p>
+  <div class="footer-contact-container">
+    <div class="footer-contact-column left">
+      <a class="footer-contact-title" href="contact">Contact me</a>
+      <p class="footer-contact-paragraph">Please get in contact to discuss how I can help you with your requirements.</p>
+    </div>
 
-  <a class="footer-contact-social" href="contact">
-    <img src="static/instagramicon.svg" alt="Instagram">
-    <span>instagram/mislavgelencir</span>
-  </a>
-
-  <a class="footer-contact-social" href="contact">
-    <img src="static/phoneicon.svg" alt="Phone number">
-    <span>00385976354350</span>
-  </a>
-  <a class="footer-contact-social" href="contact">
-    <img src="static/emailicon.svg" alt="E-mail">
-    <span>m.gelencir10@gmail.com</span>
-  </a>
+    <div class="footer-contact-column right">
+      <a class="footer-contact-social" href="contact">
+        <img src="instagramicon.svg" alt="Instagram">
+        <span>instagram/mislavgelencir</span>
+      </a>
+      <a class="footer-contact-social" href="contact">
+        <img src="phoneicon.svg" alt="Phone number">
+        <span>00385976354350</span>
+      </a>
+      <a class="footer-contact-social" href="contact">
+        <img src="emailicon.svg" alt="E-mail">
+        <span>m.gelencir10@gmail.com</span>
+      </a>
+    </div>
+  </div>
 </footer>

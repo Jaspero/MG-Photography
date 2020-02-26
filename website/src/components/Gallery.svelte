@@ -75,6 +75,7 @@
         documentTitle = `MG - ${title.replace('-', ' ')}`;
         refresh.subscribe(data => {
             try {
+                document.getElementById('loader').style.zIndex = '1';
                 document.getElementById('loader').style.opacity = '1';
                 document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0s';
                 document.getElementsByClassName('gallery-images')[0].style.opacity = '0';
@@ -84,6 +85,9 @@
                 setTimeout(() => {
                     try {
                         document.getElementById('loader').style.opacity = '0';
+                        setTimeout(() => {
+                            document.getElementById('loader').style.zIndex = '-10';
+                        }, 500);
                         document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.5s';
                         document.getElementsByClassName('gallery-images')[0].style.opacity = '1';
                     } catch (e) {

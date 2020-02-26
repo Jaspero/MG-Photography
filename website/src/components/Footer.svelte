@@ -49,7 +49,9 @@
   }
   .footer-contact-social {
     margin: 0 1em;
-    text-decoration: underline;
+    text-decoration: none;
+    text-transform: lowercase;
+    font-family: Simplo;
   }
   @media (max-width: 900px) {
     .footer-banner-title-3 {
@@ -71,5 +73,18 @@
 <footer class="footer-contact">
   <a href="contact" class="footer-contact-title">Contact me</a>
   <p class="footer-contact-paragraph">Please get in contact to discuss how I can help you with your requirements.</p>
-  <a class="footer-contact-social" href="contact">Instagram</a>
+
+  <a class="footer-contact-social" href="contact">
+    <img src="static/instagramicon.svg" alt="Instagram">
+    <span>instagram/mislavgelencir</span>
+  </a>
+
+  <a class="footer-contact-social" href="contact">
+    <img src="static/phoneicon.svg" alt="Phone number">
+    <span>00385976354350</span>
+  </a>
+  <a class="footer-contact-social" href="contact">
+    <img src="static/emailicon.svg" alt="E-mail">
+    <span>m.gelencir10@gmail.com</span>
+  </a>
 </footer>

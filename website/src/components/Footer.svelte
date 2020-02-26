@@ -49,7 +49,14 @@
     text-align: center;
   }
   .right{
-    margin: 1em 4em;
+    margin: 1em 6em;
+  }
+  .footer-icons{
+    opacity: .5;
+    transition: 300ms;
+  }
+  .footer-icons:hover{
+    opacity: 1;
   }
   .footer-contact-title {
     font-size: 3em;
@@ -92,16 +99,16 @@
     </div>
 
     <div class="footer-contact-column right">
-      <a class="footer-contact-social" href="contact">
-        <img src="instagramicon.svg" alt="Instagram">
+      <a class="footer-contact-social" href="http://instagram.com/mislavgelencir" target="_blank">
+        <img class="footer-icons" src="instagramicon.svg" alt="Instagram">
         <span>instagram/mislavgelencir</span>
       </a>
-      <a class="footer-contact-social" href="contact">
-        <img src="phoneicon.svg" alt="Phone number">
+      <a class="footer-contact-social" href="tel:00385976354350">
+        <img class="footer-icons" src="phoneicon.svg" alt="Phone number">
         <span>00385976354350</span>
       </a>
-      <a class="footer-contact-social" href="contact">
-        <img src="emailicon.svg" alt="E-mail">
+      <a class="footer-contact-social" href="mailto:m.gelencir10@gmail.com">
+        <img class="footer-icons" src="emailicon.svg" alt="E-mail">
         <span>m.gelencir10@gmail.com</span>
       </a>
     </div>

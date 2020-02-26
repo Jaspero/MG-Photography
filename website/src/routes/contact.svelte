@@ -128,7 +128,7 @@
         margin-top: 10%;
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1024px) {
         .contact-hero-title-1 {
             font-size: 3em;
             padding-left: 1em;
@@ -137,6 +137,9 @@
         .contact-hero-title-2 {
             font-size: 1.75em;
             margin-left: 1.70em;
+        }
+        .contact-hero {
+            background-position: 70% 50%;
         }
     }
     @media (max-width: 600px) {
@@ -179,6 +182,26 @@
         }
         .contact-content-picture {
             width: 100%;
+        }
+    }
+    @media (max-width: 475px) {
+        .contact-hero-title-1 {
+            font-size: 2.85em;
+            color: white;
+        }
+        .contact-hero-title-2 {
+            font-size: 1.7em;
+            color: white;
+        }
+    }
+    @media (max-width: 320px) {
+        .contact-hero-title-1 {
+            font-size: 2em;
+            color: white;
+        }
+        .contact-hero-title-2 {
+            font-size: 1.5em;
+            color: white;
         }
     }
 </style>

@@ -71,6 +71,5 @@
 <footer class="footer-contact">
   <a href="contact" class="footer-contact-title">Contact me</a>
   <p class="footer-contact-paragraph">Please get in contact to discuss how I can help you with your requirements.</p>
-  <a class="footer-contact-social" href="contact">Youtube</a>
   <a class="footer-contact-social" href="contact">Instagram</a>
 </footer>

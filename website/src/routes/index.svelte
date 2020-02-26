@@ -16,7 +16,6 @@
     fetchHomePhotos()
       .then(data => {
         photos = data.data()['Home Photos'];
-        console.log(photos);
         offsets = data.data()['offsets'];
 
         setTimeout(() => showSlides(-1), 200);

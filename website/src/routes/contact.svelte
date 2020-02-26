@@ -183,6 +183,10 @@
     }
 </style>
 
+<svelte:head>
+    <title>MG - Contact</title>
+</svelte:head>
+
 <section class="contact-hero">
     <h1 class="contact-hero-title">
         <span class="contact-hero-title-1">ABOUT ME</span>

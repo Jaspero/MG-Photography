@@ -13,8 +13,9 @@
         await firestore.collection('categories')
                 .get()
                 .then(data => {
-
-                    categories.set(data.docs.map(doc => doc.data()));
+                    const cat = data.docs.map(doc => doc.data());
+                    cat.sort((a, b) => a.order < b.order ? -1 : 1);
+                    categories.set(cat);
                 })
                 .catch(err => {
                     console.log('Categories could not be fetched!');
@@ -22,8 +23,9 @@
                 });
     }
 
-
-    refresh.set(true);
+    if (segment) {
+        refresh.set(segment.charAt(0).toUpperCase() + segment.slice(1));
+    }
 </script>
 
 <style>

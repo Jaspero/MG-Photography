@@ -1,7 +1,8 @@
 <script>
-  export let segment;
-import {afterUpdate} from "svelte";
+  import {afterUpdate} from "svelte";
   import { categories, refresh, loading } from '../stores';
+
+  export let segment;
 
   let expanded = false;
   let page = '';

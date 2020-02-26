@@ -8,6 +8,8 @@
     export let images = [];
     export let resolutions = [];
 
+    let documentTitle = '';
+
     const hasAPI = 'IntersectionObserver' in window;
 
     let parsedResolutions = {};
@@ -64,22 +66,30 @@
     }
 
     afterUpdate(() => {
-      refresh.subscribe(data => {
-        parseResolutions();
-      });
+        refresh.subscribe(data => {
+            parseResolutions();
+        });
     });
 
     onMount(() => {
-      refresh.subscribe(data => {
+        documentTitle = `MG - ${title.replace('-', ' ')}`;
+        refresh.subscribe(data => {
+            try {
+                document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0s';
+                document.getElementsByClassName('gallery-images')[0].style.opacity = '0';
 
-                document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.2s';
-                document.getElementsByClassName('gallery-images')[0].style.opacity = 0;
+                documentTitle = `MG - ${data.toString().replace('-', ' ')}`;
 
                 setTimeout(() => {
-                    document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.5s';
-                    document.getElementsByClassName('gallery-images')[0].style.opacity = 1;
+                    try {
+                        document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.5s';
+                        document.getElementsByClassName('gallery-images')[0].style.opacity = '1';
+                    } catch (e) {
+                    }
                 }, 1000);
-            });
+            } catch (e) {
+            }
+        });
     });
 
     function scrollUp() {
@@ -95,27 +105,27 @@
     };
 
     function parseResolutions() {
-      parsedResolutions = {};
+        parsedResolutions = {};
         resolutions.map(resolution => {
-          parsedResolutions[resolution.url] = {width: resolution.width, height: resolution.height};
+            parsedResolutions[resolution.url] = {width: resolution.width, height: resolution.height};
         });
 
         reorder();
     }
 
     function reorder() {
-      leftColumnImages = [];
-      leftColumnHeight = 0;
-      rightColumnImages = [];
-      rightColumnHeight = 0;
+        leftColumnImages = [];
+        leftColumnHeight = 0;
+        rightColumnImages = [];
+        rightColumnHeight = 0;
         images.map((image) => {
             if (leftColumnHeight <= rightColumnHeight) {
-            leftColumnImages.push(image);
-            leftColumnHeight += parsedResolutions[image].height;
-          } else {
-            rightColumnImages.push(image);
-            rightColumnHeight += parsedResolutions[image].height;
-          }
+                leftColumnImages.push(image);
+                leftColumnHeight += parsedResolutions[image].height;
+            } else {
+                rightColumnImages.push(image);
+                rightColumnHeight += parsedResolutions[image].height;
+            }
         });
     }
 
@@ -126,6 +136,7 @@
         max-width: 95rem;
         margin: 60px auto;
     }
+
     .gallery-title {
         position: relative;
         font-size: 8em;
@@ -137,6 +148,7 @@
         color: #6E6E6E;
         line-height: 80%;
     }
+
     .gallery-title::after {
         content: '';
         position: absolute;
@@ -148,6 +160,7 @@
         background: rgba(0, 0, 0, .1);
         border-radius: 50%;
     }
+
     .scroll-up {
         position: fixed;
         z-index: 3;
@@ -161,11 +174,13 @@
         cursor: pointer;
         border-radius: 100px;
         border: 0;
-        outline:none;
+        outline: none;
     }
+
     .scroll-up-image {
         width: 100%;
     }
+
     .viewer-overlay {
         position: fixed;
         z-index: 4;
@@ -176,6 +191,7 @@
         background-color: black;
         opacity: 0.75;
     }
+
     .viewer-photos {
         position: fixed;
         z-index: 5;
@@ -183,10 +199,10 @@
         width: auto;
         left: 50%;
         top: 50%;
-        border: 2px solid black;
-        background-color: white;
+        background-color: transparent;
         transform: translate(-50%, -50%);
     }
+
     .viewer-photo {
         height: 100%;
         width: auto;
@@ -194,6 +210,7 @@
         user-select: none;
         -webkit-user-select: none;
     }
+
     .viewer-close {
         position: absolute;
         right: 32px;
@@ -204,9 +221,11 @@
         transition: .2s;
         opacity: 0.3;
     }
+
     .viewer-close:hover {
         opacity: 1;
     }
+
     .viewer-arrow {
         position: absolute;
         top: calc(50% - 25px);
@@ -220,24 +239,30 @@
         transition: .15s;
         transform-origin: center;
     }
+
     .viewer-arrow-left {
         left: 15px;
     }
+
     .viewer-arrow-right {
         right: 15px;
     }
+
     .viewer-arrow:hover {
         transform: scale(1.1);
     }
+
     .gallery-images {
         display: flex;
         justify-content: space-between;
         opacity: 0;
         transition: 1.5s;
     }
+
     .gallery-column {
         width: calc(50% - 5px);
     }
+
     .gallery-image {
         width: 100%;
         height: auto;
@@ -245,9 +270,11 @@
         margin-bottom: 5px;
         cursor: pointer;
     }
+
     .visible {
         opacity: 1;
     }
+
     @media (max-width: 1600px) {
         .gallery-title {
             position: relative;
@@ -256,11 +283,13 @@
             padding-top: 112px;
             margin-bottom: 120px;
         }
+
         .gallery {
             max-width: 70rem;
             margin: 50px auto;
         }
     }
+
     @media (max-width: 1200px) {
         .gallery-title {
             position: relative;
@@ -269,11 +298,13 @@
             padding-top: 112px;
             margin-bottom: 120px;
         }
+
         .gallery {
             max-width: 65rem;
             margin: 50px auto;
         }
     }
+
     @media (max-width: 900px) {
         .gallery-title {
             position: relative;
@@ -282,16 +313,19 @@
             padding-top: 112px;
             margin-bottom: 120px;
         }
+
         .gallery {
             max-width: 50rem;
             margin: 50px auto;
         }
     }
+
     @media (max-width: 600px) {
         .gallery-images {
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .gallery-title {
             position: relative;
             font-size: 5.5em;
@@ -299,23 +333,31 @@
             padding-top: 112px;
             margin-bottom: 100px;
         }
+
         .viewer-photos {
             width: 90%;
             height: 0;
         }
+
         .viewer-photo {
             width: 100%;
             height: auto;
             transform: translateY(-50%);
         }
+
         .viewer-close {
             display: none;
         }
+
         .gallery-column {
             width: 90%;
         }
     }
 </style>
+
+<svelte:head>
+    <title>{documentTitle}</title>
+</svelte:head>
 
 <div class="gallery">
     <h1 class="gallery-title">{title.replace('-', ' ')}</h1>
@@ -323,14 +365,14 @@
         <div class="gallery-column" id="column-left">
             {#each leftColumnImages as image, i}
                 <div class="gallery-image" on:click={() => viewPhoto(image)}>
-                    <Image item={image} lazy={hasAPI} />
+                    <Image item={image} lazy={hasAPI}/>
                 </div>
             {/each}
         </div>
         <div class="gallery-column" id="column-right">
             {#each rightColumnImages as image, i}
                 <div class="gallery-image" on:click={() => viewPhoto(image)}>
-                    <Image item={image} lazy={hasAPI} />
+                    <Image item={image} lazy={hasAPI}/>
                 </div>
             {/each}
         </div>
@@ -339,7 +381,8 @@
 
 
 {#if scrollerVisible}
-    <button class="scroll-up" on:click={scrollUp} transition:fade="{{duration: 200}}" aria-label="Scroll to top." title="Scroll to top.">
+    <button class="scroll-up" on:click={scrollUp} transition:fade="{{duration: 200}}" aria-label="Scroll to top."
+            title="Scroll to top.">
         <img class="scroll-up-image" src="/icons/single-arrow-up.svg" alt=""/>
     </button>
 {/if}

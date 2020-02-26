@@ -75,6 +75,7 @@
         documentTitle = `MG - ${title.replace('-', ' ')}`;
         refresh.subscribe(data => {
             try {
+                document.getElementById('loader').style.opacity = '1';
                 document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0s';
                 document.getElementsByClassName('gallery-images')[0].style.opacity = '0';
 
@@ -82,11 +83,12 @@
 
                 setTimeout(() => {
                     try {
+                        document.getElementById('loader').style.opacity = '0';
                         document.getElementsByClassName('gallery-images')[0].style.transitionDuration = '0.5s';
                         document.getElementsByClassName('gallery-images')[0].style.opacity = '1';
                     } catch (e) {
                     }
-                }, 1000);
+                }, 1600);
             } catch (e) {
             }
         });
@@ -275,6 +277,24 @@
         opacity: 1;
     }
 
+    #loader {
+        /*display: flex;*/
+        /*opacity: 1;*/
+        /*width: 100%;*/
+        /*align-items: center;*/
+        /*justify-content: center;*/
+        transition: 0.4s;
+        position: fixed;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+    #loader img {
+        width: 100px;
+    }
+
     @media (max-width: 1600px) {
         .gallery-title {
             position: relative;
@@ -361,6 +381,9 @@
 
 <div class="gallery">
     <h1 class="gallery-title">{title.replace('-', ' ')}</h1>
+    <div id="loader">
+        <img alt="Loader" src="/icons/loader.svg">
+    </div>
     <div class="gallery-images" class:visible={!$loading}>
         <div class="gallery-column" id="column-left">
             {#each leftColumnImages as image, i}

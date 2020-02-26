@@ -10,7 +10,7 @@
 
     if (lazy) {
         src = '';
-        observer = new IntersectionObserver(onIntersect, {rootMargin: '300px'});
+        observer = new IntersectionObserver(onIntersect, {rootMargin: '500px'});
     }
 
     function onIntersect(entries) {

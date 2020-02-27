@@ -47,9 +47,10 @@
   }
   .left{
     text-align: center;
+    margin: auto;
   }
   .right{
-    margin: 1em 6em;
+    margin: auto;
   }
   .footer-icons{
     opacity: .5;
@@ -77,6 +78,24 @@
   @media (max-width: 900px) {
     .footer-banner-title-3 {
       display: inline;
+    }
+  }
+  @media (max-width: 600px) {
+    .footer-contact-container {
+      max-width: 25em;
+      display: inline-block;
+    }
+    .left{
+      text-align: center;
+      margin: auto;
+
+    }
+    .right{
+      margin: 1em 3em;
+      padding-top: 2em;
+    }
+    .footer-contact {
+      height: 420px;
     }
   }
 </style>

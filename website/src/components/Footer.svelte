@@ -83,7 +83,7 @@
   @media (max-width: 600px) {
     .footer-contact-container {
       max-width: 25em;
-      display: inline-block;
+      display: block;
     }
     .left{
       text-align: center;

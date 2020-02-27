@@ -104,7 +104,7 @@
   <h2 class="footer-banner-title">
     <span class="footer-banner-title-2">Talk to me</span>
     <span class="footer-banner-title-3">if you have some ideas for</span>
-    <a href="contact" class="footer-banner-title-4">ANY</a>
+    <span class="footer-banner-title-4">ANY</span>
     <span class="footer-banner-title-5">collaborations</span>
   </h2>
   <p class="footer-banner-paragraph">Whether you are ready to book me as your photographer, have some questions or want to chat about your ideas and see if I would be the right fit for you, give me a call, send me a message or an e-mail and I'll get back to you as soon as possible.</p>

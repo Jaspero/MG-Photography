@@ -124,7 +124,7 @@
       </a>
       <a class="footer-contact-social" href="tel:00385976354350">
         <img class="footer-icons" src="phoneicon.svg" alt="Phone number">
-        <span>00385976354350</span>
+        <span>+385976354350</span>
       </a>
       <a class="footer-contact-social" href="mailto:m.gelencir10@gmail.com">
         <img class="footer-icons" src="emailicon.svg" alt="E-mail">

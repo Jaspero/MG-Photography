@@ -11,7 +11,7 @@
   });
 
   function go(name) {
-    expanded = !expanded;
+    expanded = false;
     document.body.classList.remove('overflow-hidden');
     refresh.set(name);
     loading.set(true);
@@ -116,6 +116,9 @@
     {#each $categories as category}
       <a class="header-link" class:active={category.name.toLowerCase().replace(' ', '-') == page} on:click={() => go(category.name)} href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
     {/each}
+    {#if expanded}
+        <a class="header-link" class:active={page == "contact"} on:click={() => go("contact")} href="/contact">Contact</a>
+      {/if}
   </nav>
   <button class="header-menu" on:click={toggleMenu} class:active={expanded}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-linecap="round" width="20">

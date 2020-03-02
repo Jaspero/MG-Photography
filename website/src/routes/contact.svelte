@@ -215,7 +215,7 @@
         <span class="contact-hero-title-1">ABOUT ME</span>
         <span class="contact-hero-title-2">& CONTACT INFO</span>
     </h1>
-    <a class="contact-hero-link" href="mailto:marko.vranjesevic92@gmail.com">
+    <a class="contact-hero-link" href="mailto:m.gelencir10@gmail.com">
         <span class="contact-hero-link-1">FOR ANY REQUESTS</span>
         <span class="contact-hero-link-2">E-MAIL ME</span>
     </a>

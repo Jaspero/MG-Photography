@@ -36,12 +36,14 @@
     function viewNext() {
         let nextIndex = images.indexOf(photoViewer.src) + 1;
         if (nextIndex === images.length) nextIndex = 0;
+        showLoader();
         viewPhoto(images[nextIndex]);
     }
 
     function viewPrev() {
         let prevIndex = images.indexOf(photoViewer.src) - 1;
         if (prevIndex < 0) prevIndex = images.length - 1;
+        showLoader();
         viewPhoto(images[prevIndex]);
     }
 
@@ -138,6 +140,18 @@
         });
     }
 
+    function hideLoader() {
+      document.getElementById('viewer-loader').classList.add('hide');
+      document.getElementById('viewer-photo').classList.remove('hide');
+      document.getElementById('viewer-loader').style.zIndex = '-10';
+    }
+
+    function showLoader() {
+      document.getElementById('viewer-loader').classList.remove('hide');
+      document.getElementById('viewer-photo').classList.add('hide')
+      document.getElementById('viewer-loader').style.zIndex = '10';
+    }
+
 </script>
 
 <style>
@@ -208,7 +222,6 @@
         width: auto;
         left: 50%;
         top: 50%;
-        background-color: transparent;
         transform: translate(-50%, -50%);
     }
 
@@ -218,6 +231,7 @@
         pointer-events: none;
         user-select: none;
         -webkit-user-select: none;
+        transition: 0.4s;
     }
 
     .viewer-close {
@@ -285,11 +299,6 @@
     }
 
     #loader {
-        /*display: flex;*/
-        /*opacity: 1;*/
-        /*width: 100%;*/
-        /*align-items: center;*/
-        /*justify-content: center;*/
         transition: 0.4s;
         position: fixed;
         top: 60%;
@@ -300,6 +309,30 @@
 
     #loader img {
         width: 100px;
+    }
+
+    #viewer-loader {
+        transition: 0.4s;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+    #viewer-loader img {
+        width: 100px;
+    }
+
+    .hide {
+        opacity: 0;
+    }
+
+    @media (min-width: 900px) {
+        .viewer-photos {
+            min-height: 450px;
+            min-width: 450px;
+        }
     }
 
     @media (max-width: 1600px) {
@@ -421,10 +454,13 @@
     <div class="viewer" transition:fade={{duration: 200}}>
         <div class="viewer-overlay" on:click={closePhotoViewer}></div>
         <div class="viewer-photos">
-            <img class="viewer-photo" src={photoViewer.src} alt="Active photo" ondrag="return false"
+            <img class="viewer-photo hide" id="viewer-photo" on:load={hideLoader} src={photoViewer.src} alt="Active photo" ondrag="return false"
                  ondragstart="return false"
                  galleryimg="no"
                  onmousedown="return false"/>
+            <div id="viewer-loader">
+                <img alt="Loader" src="/icons/loader.svg">
+            </div>
             <span class="viewer-close" on:click={closePhotoViewer}></span>
             <span class="viewer-arrow viewer-arrow-left unselectable" on:click={viewPrev}>&lt;</span>
             <span class="viewer-arrow viewer-arrow-right unselectable" on:click={viewNext}>&gt;</span>

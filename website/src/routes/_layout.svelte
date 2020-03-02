@@ -3,7 +3,17 @@
     import { firestore } from '../firebase';
     import { categories, refresh } from '../stores';
     import Header from '../components/Header.svelte';
-    import Footer from '../components/Footer.svelte'
+    import Footer from '../components/Footer.svelte';
+
+    let dots = '...';
+
+    setInterval(() => {
+      if (dots.length < 3) {
+        dots += '.';
+      } else {
+        dots = '.';
+      }
+    }, 800);
 
     export let segment;
 
@@ -55,11 +65,9 @@
 
 <main>
     {#await categoriesFetch}
-
         <div class="loader">
-            <h1>Loading...</h1>
+            <h1>Loading{dots}</h1>
         </div>
-
     {:then number}
         <slot></slot>
     {/await}
@@ -68,4 +76,3 @@
 {#if (segment !== 'undefined' && segment)}
     <Footer/>
 {/if}
-

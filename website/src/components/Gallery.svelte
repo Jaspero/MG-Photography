@@ -125,12 +125,15 @@
         rightColumnImages = [];
         rightColumnHeight = 0;
         images.map((image) => {
+            const ratio = parsedResolutions[image].width / parsedResolutions[image].height;
+            const height = 1000 / ratio;
+
             if (leftColumnHeight <= rightColumnHeight) {
                 leftColumnImages.push(image);
-                leftColumnHeight += parsedResolutions[image].height;
+                leftColumnHeight += height;
             } else {
                 rightColumnImages.push(image);
-                rightColumnHeight += parsedResolutions[image].height;
+                rightColumnHeight += height;
             }
         });
     }

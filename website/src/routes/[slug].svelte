@@ -14,7 +14,7 @@
       if (!page || !category) {
         return false;
       }
-      if (page.path === '/' || page.path === '/contact') return page.path;
+      if (page.path === '/' || page.path === '/contact' || page.path === '/videos') return page.path;
 
       return category.find(it => it.name.toLowerCase() === page.params.slug);
     }

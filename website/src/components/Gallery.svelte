@@ -428,7 +428,7 @@
         <div class="gallery-column" id="column-left">
             {#each leftColumnImages as image, i}
                 <div class="gallery-image" on:click={() => viewPhoto(image)}>
-                    <Image item={image} lazy={hasAPI}/>
+                    <Image item={image} lazy={hasAPI} />
                 </div>
             {/each}
         </div>

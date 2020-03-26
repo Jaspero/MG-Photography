@@ -157,7 +157,7 @@
         <h1 class="video-title">{video.title}</h1>
         <div class="video-container">
             <div class="video-foreground">
-                <iframe src="https://www.youtube.com/embed/{video.videoid}?controls=0&showinfo=0&rel=0&autoplay=0&mute=1"
+                <iframe src="https://www.youtube.com/embed/{video.videoid}?controls=0&showinfo=0&rel=0&autoplay=0"
                         frameBorder="0" allowFullScreen>
                 </iframe>
             </div>

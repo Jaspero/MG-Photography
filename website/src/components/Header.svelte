@@ -5,6 +5,7 @@
     export let segment;
 
     let expanded = false;
+    let showContact = false;
     let page = '';
     afterUpdate(() => {
         page = window.location.pathname.slice(1).toLowerCase().replace('%20', '-');
@@ -19,6 +20,14 @@
 
     function toggleMenu() {
         expanded = !expanded;
+
+        if (expanded) {
+            showContact = true;
+        } else {
+            setTimeout(() => {
+                showContact = false;
+            }, 1000);
+        }
         document.body.classList.toggle('overflow-hidden');
     }
 
@@ -130,7 +139,7 @@
                href={category.name.toLowerCase()}>{category.name.replace('-', ' ')}</a>
         {/each}
         <a class="header-link" class:active={page == 'videos'} on:click={() => go('videos')} href="videos">Videos</a>
-        {#if setTimeout(() => expanded, 500)}
+        {#if showContact}
             <a class="header-link" class:active={page == "contact"} on:click={() => go("contact")} href="/contact">Contact</a>
         {/if}
     </nav>

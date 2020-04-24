@@ -2,7 +2,6 @@
     import {afterUpdate, onMount} from 'svelte';
     import {refresh, loading} from '../stores';
 
-    export let title = '';
     export let videos = [];
 
 </script>
@@ -37,14 +36,6 @@
         border-radius: 50%;
     }
 
-    #loader img {
-        width: 100px;
-    }
-
-    #viewer-loader img {
-        width: 100px;
-    }
-
     .video-title {
         margin-left: 5%;
         margin-bottom: 10px;
@@ -54,7 +45,6 @@
         width: 90%;
         height: 70vh;
         min-height: 400px;
-        /*height: calc(90vw / 2.6);*/
         margin-left: 5%;
         margin-bottom: 100px;
         overflow: hidden;
@@ -157,14 +147,10 @@
         <h1 class="video-title">{video.title}</h1>
         <div class="video-container">
             <div class="video-foreground">
-                <iframe src="https://www.youtube.com/embed/{video.videoid}?controls=0&showinfo=0&rel=0&autoplay=0"
+                <iframe title="{video.title}" src="https://www.youtube.com/embed/{video.videoid}?controls=0&showinfo=0&rel=0&autoplay=0"
                         frameBorder="0" allowFullScreen>
                 </iframe>
             </div>
         </div>
     {/each}
-
-        <!--    <iframe id="player" type="text/html" width="640" height="390"-->
-    <!--            src="http://www.youtube.com/embed/bx1Bh8ZvH84?enablejsapi=1&origin=http://example.com&controls=1&disablekb=1&modestbranding=1&iv_load_policy=3&showinfo=0"-->
-    <!--            frameborder="0"></iframe>-->
 </div>

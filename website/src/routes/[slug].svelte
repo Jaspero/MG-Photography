@@ -21,7 +21,13 @@
   ).subscribe(siteData => {
     if (siteData) {
       if (typeof siteData === 'string') goto(siteData);
-      else site = siteData;
+      else {
+        site = {name: siteData.name, gallery: [], resolutions: []};
+
+        setTimeout(() => {
+          site = siteData;
+        }, 10);
+      }
     } else if (siteData === undefined) {
       site = undefined;
       goto('404');

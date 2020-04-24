@@ -157,6 +157,7 @@
 <style>
     .gallery {
         max-width: 95rem;
+        min-height: 100vh;
         margin: 60px auto;
     }
 

@@ -26,6 +26,8 @@
 
     let scrollerVisible = false;
 
+    window.addEventListener('resize', reorder);
+
     function viewPhoto(src) {
         photoViewer.src = src;
         photoViewer.active = true;
@@ -126,18 +128,23 @@
         leftColumnHeight = 0;
         rightColumnImages = [];
         rightColumnHeight = 0;
-        images.map((image) => {
-            const ratio = parsedResolutions[image].width / parsedResolutions[image].height;
-            const height = 1000 / ratio;
+      if (window.innerWidth <= 600) {
+        leftColumnImages = [...images];
+        rightColumnImages = [];
+      } else {
+        images.forEach((image) => {
+          const ratio = parsedResolutions[image].width / parsedResolutions[image].height;
+          const height = 1000 / ratio;
 
-            if (leftColumnHeight <= rightColumnHeight) {
-                leftColumnImages.push(image);
-                leftColumnHeight += height;
-            } else {
-                rightColumnImages.push(image);
-                rightColumnHeight += height;
-            }
+          if (leftColumnHeight <= rightColumnHeight) {
+            leftColumnImages.push(image);
+            leftColumnHeight += height;
+          } else {
+            rightColumnImages.push(image);
+            rightColumnHeight += height;
+          }
         });
+      }
     }
 
     function hideLoader() {

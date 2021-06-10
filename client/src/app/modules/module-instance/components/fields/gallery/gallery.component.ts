@@ -344,9 +344,9 @@ export class GalleryComponent extends FieldComponent<GalleryData>
                 return getMeta(cur.data)
                   .pipe(
                     tap((size: object) => {
-                      console.log(this.cData.form.get('resolutions'));
+                      console.log(this.cData.form.get('offsets'));
                       cur.data = url;
-                      (this.cData.form.get('resolutions') as FormArray).push(
+                      (this.cData.form.get('offsets') as FormArray).push(
                         this.fb.group({url, ...size})
                       );
                     })

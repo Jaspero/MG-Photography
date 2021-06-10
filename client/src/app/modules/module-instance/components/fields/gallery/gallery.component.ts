@@ -92,6 +92,10 @@ export class GalleryComponent extends FieldComponent<GalleryData>
 
   ngOnInit() {
     this.state.saveComponents.push(this);
+
+    if (!this.cData.control.value) {
+      this.cData.control.setValue([]);
+    }
   }
 
   ngAfterViewInit() {

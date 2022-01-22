@@ -33,7 +33,7 @@
     "json-pointer": "0.6.0",
     "jsoneditor": "7.0.4",
     "lodash-es": "4.17.14",
-    "nanoid": "2.1.1",
+    "nanoid": "3.1.31",
     "rxjs": "6.5.3",
     "tinymce": "5.2.2",
     "tslib": "1.10.0",
